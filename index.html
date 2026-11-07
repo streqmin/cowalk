@@ -482,6 +482,8 @@ function setActive(i,pan){
   if(!mapsReady) return;
   markers.forEach((m,j)=>m.setIcon(pinIcon(CAT[P[j].c].hex,j===i)));
   if(pan && Date.now()>userPanUntil){ map.panTo({lat:P[i].lat,lng:P[i].lng}); }
+  // 활성 장소의 정보창을 지도에 함께 표시 (사용자가 지도를 조작 중이면 유지)
+  if(Date.now()>userPanUntil) openInfo(P[i]);
 }
 function scrollToCard(i){
   const p=P[i];
