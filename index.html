@@ -36,7 +36,7 @@
 
   .wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 20px}
 
-  .top{position:sticky;top:0;z-index:20;background:rgba(251,251,250,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
+  .top{position:sticky;top:0;z-index:30;background:rgba(251,251,250,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
   .brand{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;font-size:17px;white-space:nowrap}
   .brand small{font-family:var(--mono);font-weight:400;font-size:11px;color:var(--muted);margin-left:8px;letter-spacing:.04em}
@@ -48,9 +48,9 @@
   .tab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
   .tab:active{transform:scale(.98)}
 
-  .hero{padding:56px 0 36px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end}
+  .hero{padding:48px 0 32px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end;border-bottom:1px solid var(--line);margin-bottom:28px}
   .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--maple);margin:0 0 14px}
-  h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.6vw,52px);line-height:1.12;letter-spacing:-.03em;margin:0 0 18px}
+  h1{font-family:var(--serif);font-weight:600;font-size:clamp(28px,4.4vw,50px);line-height:1.12;letter-spacing:-.03em;margin:0 0 18px}
   h1 em{font-style:normal;color:var(--maple)}
   .lede{color:var(--muted);max-width:56ch;margin:0;font-size:15px}
   .hero-aside{border-left:1px solid var(--line);padding-left:28px;font-size:13px;color:var(--muted)}
@@ -62,48 +62,48 @@
   .pill.cafe{background:var(--ginkgo-pale);color:#7E5A14}
   .pill.see{background:var(--moss-pale);color:#46522F}
 
-  .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:28px}
-  .toolbar .left{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-  .btn{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:8px 12px;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all .2s var(--ease);text-decoration:none;color:var(--ink)}
+  .btn{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:8px 12px;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all .2s var(--ease);text-decoration:none;color:var(--ink);line-height:1.2}
   .btn:hover{border-color:#D9D5CD}
   .btn:active{transform:scale(.98)}
   .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
   .btn.primary:hover{background:#333}
+  .btn.on{background:var(--maple-pale);border-color:#E6C7BC;color:#8F3421}
   .btn[disabled]{opacity:.5;cursor:default}
-  .btn svg{width:15px;height:15px}
-  .status{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.02em}
+  .btn svg{width:15px;height:15px;flex:none}
+  .btn.sm{padding:6px 9px;font-size:12px}
+  .btn.sm svg{width:13px;height:13px}
+  .status{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.02em;line-height:1.4}
   .status.ok{color:var(--moss)}
   .status.err{color:var(--maple)}
 
-  .main{display:grid;grid-template-columns:1fr 440px;gap:36px;align-items:start;padding-bottom:96px}
+  .main{display:grid;grid-template-columns:1fr 460px;gap:36px;align-items:start;padding-bottom:96px}
   .list{min-width:0}
-  .section{margin-bottom:52px}
-  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:0 0 18px;padding-bottom:12px;border-bottom:1px solid var(--line)}
+  .section{margin-bottom:48px}
+  .section-head{display:flex;align-items:baseline;justify-content:space-between;gap:16px;margin:0 0 16px;padding-bottom:12px;border-bottom:1px solid var(--line)}
   .section-head h2{font-family:var(--serif);font-size:24px;font-weight:600;letter-spacing:-.02em;margin:0}
   .section-head h2 span{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:10px;vertical-align:1px}
   .section-head p{margin:0;font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.04em;white-space:nowrap}
-  .grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
-  .grid .card:nth-child(5n+1){grid-column:span 2}
+  .grid{display:grid;grid-template-columns:1fr;gap:14px}
 
-  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:1fr;transition:box-shadow .2s var(--ease),border-color .2s var(--ease);position:relative}
+  /* horizontal card: photo left, info right */
+  .card{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:grid;grid-template-columns:minmax(220px,5fr) 7fr;transition:box-shadow .2s var(--ease),border-color .2s var(--ease);position:relative;scroll-margin-top:90px}
   .card:hover{box-shadow:0 2px 10px rgba(50,30,10,.05)}
+  .card.active{border-color:#D9C9B8}
   .card.focus{border-color:var(--maple);box-shadow:0 0 0 3px var(--maple-pale)}
-  .grid .card:nth-child(5n+1){grid-template-columns:5fr 6fr}
-  .fig{position:relative;background:#F4F2EC;aspect-ratio:4/3;overflow:hidden}
-  .grid .card:nth-child(5n+1) .fig{aspect-ratio:auto;min-height:220px;height:100%}
-  .fig svg{width:100%;height:100%;display:block}
+  .fig{position:relative;background:#F4F2EC;min-height:210px;height:100%;overflow:hidden}
+  .fig svg{position:absolute;inset:0;width:100%;height:100%;display:block}
   .fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s var(--ease);filter:saturate(.88)}
   .fig img.in{opacity:1}
   .fig .grain{position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,220,160,.35),transparent 60%);pointer-events:none}
-  .fig.has-photo .grain{background:linear-gradient(to top,rgba(31,29,26,.28),transparent 45%)}
-  .fig .attr{position:absolute;left:10px;bottom:9px;font-size:10px;color:rgba(255,255,255,.85);display:none;max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .fig.has-photo .grain{background:linear-gradient(to top,rgba(31,29,26,.32),transparent 45%)}
+  .fig .attr{position:absolute;left:10px;bottom:9px;font-size:10px;color:rgba(255,255,255,.85);display:none;max-width:58%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
   .fig .attr a{color:inherit}
   .fig.has-photo .attr{display:block}
-  .fig .photo-link{position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:6px;padding:5px 9px;font-size:11.5px;font-weight:500;text-decoration:none;display:inline-flex;gap:5px;align-items:center}
+  .fig .photo-link{position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.92);border:1px solid var(--line);border-radius:6px;padding:5px 9px;font-size:11.5px;font-weight:500;text-decoration:none;display:inline-flex;gap:5px;align-items:center}
   .fig .photo-link svg{width:12px;height:12px}
-  .body{padding:18px 20px 16px;display:flex;flex-direction:column;gap:10px}
+  .body{padding:18px 20px 16px;display:flex;flex-direction:column;gap:9px;min-width:0}
   .body .meta{display:flex;align-items:center;gap:8px;flex-wrap:wrap}
-  .body h3{margin:0;font-size:17px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
+  .body h3{margin:0;font-size:18px;font-weight:600;letter-spacing:-.01em;line-height:1.3}
   .body .wait{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.03em}
   .body .wait.good{color:var(--moss)}
   .body .wait.bad{color:var(--maple)}
@@ -113,29 +113,46 @@
   .body .hours{font-family:var(--mono);font-size:11px;color:var(--muted);letter-spacing:.02em}
   .dist{font-family:var(--mono);font-size:11px;color:var(--moss);letter-spacing:.02em;display:none}
   .dist.show{display:inline}
-  .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
-  .actions .btn{padding:6px 10px;font-size:12px}
-  .actions .btn svg{width:13px;height:13px}
+  .actions{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:4px}
   .tagrow{display:flex;gap:5px;flex-wrap:wrap}
   .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:9999px;padding:2px 8px}
 
-  .mapcol{position:sticky;top:72px}
+  /* nearby results */
+  .nearby{border:1px solid var(--line);border-radius:12px;background:var(--surface);overflow:hidden}
+  .nearby .nhead{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid var(--line);gap:10px}
+  .nearby .nhead b{font-size:14px}
+  .nearby .nhead span{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em}
+  .nrow{display:grid;grid-template-columns:64px 1fr auto;gap:12px;align-items:center;padding:10px 16px;border-bottom:1px solid var(--line);cursor:pointer;transition:background .15s}
+  .nrow:last-child{border-bottom:0}
+  .nrow:hover,.nrow.on{background:#FBF8F3}
+  .nrow .nimg{width:64px;height:52px;border-radius:6px;background:#F1EDE2;object-fit:cover;display:block}
+  .nrow .nname{font-size:14px;font-weight:600;line-height:1.3}
+  .nrow .nmeta{font-size:11.5px;color:var(--muted);font-family:var(--mono);letter-spacing:.01em;display:flex;gap:8px;flex-wrap:wrap}
+  .nrow .open{color:var(--moss)} .nrow .closed{color:var(--maple)}
+  .nempty{padding:22px 16px;font-size:13px;color:var(--muted)}
+
+  /* map panel */
+  .mapcol{position:sticky;top:72px;z-index:10}
   .mapbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
-  .maphead{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
-  .maphead b{font-size:13px;font-weight:600}
-  .maphead span{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em}
-  #gmap{height:520px;background:#F3F1EB}
+  .maphead{display:flex;justify-content:space-between;align-items:center;padding:10px 12px;border-bottom:1px solid var(--line);gap:8px}
+  .maphead b{font-size:13px;font-weight:600;white-space:nowrap}
+  .maphead .mh-right{display:flex;gap:6px;align-items:center}
+  #gmap{height:440px;background:#F3F1EB}
   .nokey{padding:28px 22px;font-size:13px;color:var(--muted);line-height:1.6}
   .nokey b{color:var(--ink);display:block;margin-bottom:6px}
   .nokey code{font-family:var(--mono);font-size:11.5px;background:#F7F6F3;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
-  .legend{display:flex;gap:14px;padding:10px 14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);flex-wrap:wrap}
-  .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
-  .routebar{display:none;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-top:1px solid var(--line);font-size:12.5px}
+  .ctrl{padding:10px 12px;border-top:1px solid var(--line);display:flex;flex-direction:column;gap:8px}
+  .ctrl .row{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
+  .ctrl .lbl{font-family:var(--mono);font-size:10.5px;letter-spacing:.06em;color:var(--muted);text-transform:uppercase;margin-right:2px}
+  .ctrl select{font-family:var(--mono);font-size:11.5px;border:1px solid var(--line);border-radius:6px;padding:6px 8px;background:var(--surface);color:var(--ink)}
+  .routebar{display:none;align-items:center;justify-content:space-between;gap:10px;padding:9px 12px;border-top:1px solid var(--line);font-size:12.5px;background:#FBF8F3}
   .routebar.show{display:flex}
   .routebar b{font-weight:600}
   .routebar span{font-family:var(--mono);font-size:11px;color:var(--moss)}
-  .routebar .btn{padding:5px 9px;font-size:11.5px}
-  .iw{font-family:var(--sans);max-width:220px}
+  .legend{display:flex;gap:12px;padding:8px 12px;border-top:1px solid var(--line);font-size:11px;color:var(--muted);flex-wrap:wrap}
+  .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
+  .legend i.hollow{background:transparent;border:2px solid #7A7570;width:6px;height:6px}
+  .iw{font-family:var(--sans);max-width:230px}
   .iw b{display:block;font-size:14px;margin-bottom:2px}
   .iw small{display:block;color:#7A7570;font-size:11.5px;margin-bottom:8px}
   .iw a,.iw button{font-family:inherit;font-size:12px;border:1px solid #EAE7E1;background:#fff;border-radius:5px;padding:5px 8px;cursor:pointer;text-decoration:none;color:#1F1D1A;margin-right:4px}
@@ -145,28 +162,34 @@
   footer .wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px}
 
   @media (prefers-reduced-motion:no-preference){
-    .rv{opacity:0;transform:translateY(12px);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:calc(var(--i,0)*70ms)}
+    .rv{opacity:0;transform:translateY(12px);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:calc(var(--i,0)*60ms)}
     .rv.in{opacity:1;transform:none}
   }
 
   @media (max-width:900px){
-    .hero{grid-template-columns:1fr;gap:22px;padding:36px 0 24px}
-    .hero-aside{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:18px}
-    .main{grid-template-columns:1fr;gap:20px}
-    .mapcol{order:-1;position:sticky;top:56px;z-index:10}
+    .hero{grid-template-columns:1fr;gap:20px;padding:30px 0 22px}
+    .hero-aside{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:16px}
+    .main{grid-template-columns:1fr;gap:18px}
+    .mapcol{order:-1;top:56px}
     .mapbox{border-radius:10px;box-shadow:0 6px 20px rgba(40,20,5,.08)}
-    #gmap{height:280px;transition:height .3s var(--ease)}
+    #gmap{height:220px;transition:height .3s var(--ease)}
+    .legend{display:none}
+    .ctrl{padding:8px 10px;gap:6px}
     .mapbox.collapsed #gmap{height:0}
-    .mapbox.collapsed .legend,.mapbox.collapsed .routebar{display:none}
-    .maphead button{display:inline-flex}
-    .grid{grid-template-columns:1fr}
-    .grid .card:nth-child(5n+1){grid-column:auto;grid-template-columns:1fr}
-    .grid .card:nth-child(5n+1) .fig{aspect-ratio:16/9;min-height:0;height:auto}
+    .mapbox.collapsed .routebar,.mapbox.collapsed .ctrl .row.secondary{display:none}
+    .maphead #toggleMap{display:inline-flex}
+    .card{grid-template-columns:38% 1fr;scroll-margin-top:calc(56px + 46vh)}
+    .fig{min-height:150px}
+    .body{padding:12px 14px 12px;gap:6px}
+    .body h3{font-size:15.5px}
+    .body p{font-size:12.5px;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+    .tagrow{display:none}
+    .actions .btn .lbl-long{display:none}
     .brand small{display:none}
     footer .wrap{grid-template-columns:1fr}
   }
-  .maphead button{display:none}
-  @media (max-width:420px){ .tab{padding:7px 9px;font-size:12.5px} }
+  #toggleMap{display:none}
+  @media (max-width:420px){ .tab{padding:7px 9px;font-size:12.5px} .card{grid-template-columns:42% 1fr} }
 </style>
 </head>
 <body>
@@ -189,7 +212,7 @@
     <div>
       <p class="eyebrow">효자로 은행나무가 가장 노란 주</p>
       <h1>경복궁 서쪽 담장을 따라,<br>천천히 먹고 마시고 <em>구경하는</em> 하루</h1>
-      <p class="lede">셋이서 12시에 만나 다섯 시, 혹은 저녁까지. 대기 30분 안쪽의 식당, 자리 걱정 없는 카페, 걸어서 닿는 전시와 문구점을 한 장에 모았습니다. 각 장소에서 바로 길찾기를 열 수 있어요.</p>
+      <p class="lede">셋이서 12시에 만나 다섯 시, 혹은 저녁까지. 대기 30분 안쪽의 식당, 자리 걱정 없는 카페, 걸어서 닿는 전시와 문구점을 한 장에 모았습니다. 스크롤하면 지도가 따라오고, 지도의 핀을 누르면 카드로 이동합니다.</p>
     </div>
     <aside class="hero-aside">
       <dl>
@@ -200,26 +223,38 @@
     </aside>
   </section>
 
-  <div class="toolbar">
-    <div class="left">
-      <button class="btn primary" id="locate">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>
-        내 위치 표시 · 거리순 정렬
-      </button>
-      <span class="status" id="status">위치 권한을 허용하면 지도에 내 위치가 뜨고 각 장소까지 도보 거리가 표시됩니다.</span>
-    </div>
-    <span class="status" id="count"></span>
-  </div>
-
   <div class="main">
-    <div class="list" id="list"></div>
+    <div class="list">
+      <div id="nearbyWrap"></div>
+      <div id="list"></div>
+    </div>
 
     <div class="mapcol">
       <div class="mapbox" id="mapbox">
-        <div class="maphead"><b>서촌 지도</b><span id="maphint">GOOGLE MAPS</span><button class="btn" id="toggleMap" style="padding:4px 9px;font-size:11.5px">접기</button></div>
+        <div class="maphead">
+          <b>서촌 지도</b>
+          <div class="mh-right">
+            <button class="btn sm primary" id="locate" title="내 위치 표시 · 거리순 정렬">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>
+              내 위치
+            </button>
+            <button class="btn sm" id="toggleMap">접기</button>
+          </div>
+        </div>
         <div id="gmap"></div>
-        <div class="routebar" id="routebar"><div><b id="routeName"></b> <span id="routeInfo"></span></div><div style="display:flex;gap:6px"><a class="btn" id="routeOpen" href="#" target="_blank" rel="noopener">앱에서 열기</a><button class="btn" id="routeClear">경로 지우기</button></div></div>
-        <div class="legend"><span><i style="background:#B5452B"></i>식사</span><span><i style="background:#B8862B"></i>카페</span><span><i style="background:#5F6B45"></i>구경</span><span><i style="background:#2B6CB0"></i>내 위치</span></div>
+        <div class="ctrl">
+          <div class="row">
+            <span class="lbl">주변 탐색</span>
+            <button class="btn sm" data-near="meal"><i style="width:7px;height:7px;border-radius:50%;background:var(--maple)"></i>식당</button>
+            <button class="btn sm" data-near="cafe"><i style="width:7px;height:7px;border-radius:50%;background:var(--ginkgo)"></i>카페</button>
+            <button class="btn sm" data-near="see"><i style="width:7px;height:7px;border-radius:50%;background:var(--moss)"></i>구경</button>
+            <select id="radius" title="반경"><option value="300">300m</option><option value="500" selected>500m</option><option value="800">800m</option><option value="1200">1.2km</option></select>
+            <button class="btn sm" id="nearClear" style="display:none">지우기</button>
+          </div>
+          <div class="row secondary"><span class="status" id="status">「내 위치」를 누르면 지도에 내 위치가 뜨고 모든 장소에 도보 거리가 붙습니다. 주변 탐색은 현재 위치 기준으로 지금 영업 중인 곳을 찾습니다.</span></div>
+        </div>
+        <div class="routebar" id="routebar"><div><b id="routeName"></b> <span id="routeInfo"></span></div><div style="display:flex;gap:6px"><a class="btn sm" id="routeOpen" href="#" target="_blank" rel="noopener">앱에서 열기</a><button class="btn sm" id="routeClear">지우기</button></div></div>
+        <div class="legend"><span><i style="background:#B5452B"></i>식사</span><span><i style="background:#B8862B"></i>카페</span><span><i style="background:#5F6B45"></i>구경</span><span><i class="hollow"></i>주변 탐색 결과</span><span><i style="background:#2B6CB0"></i>내 위치</span></div>
       </div>
     </div>
   </div>
@@ -232,8 +267,8 @@
       <p>각 카드의 사진은 Google 지도(Places)에서 가져옵니다. 사진이 없는 곳은 일러스트로 두고, 「사진 보기」로 Google 지도의 장소 페이지를 엽니다.</p>
     </div>
     <div>
-      <b style="color:var(--ink)">길찾기에 대하여</b>
-      <p>「현재 위치에서 길찾기」는 위치 권한이 있으면 지도 위에 도보 경로를 그리고, 없으면 Google 지도 앱을 열어 기기 위치를 출발점으로 경로를 만듭니다. 운영시간은 2026년 11월 7일 기준이며 방문 전 확인을 권합니다.</p>
+      <b style="color:var(--ink)">길찾기·주변 탐색에 대하여</b>
+      <p>「길찾기」는 위치 권한이 있으면 지도 위에 도보 경로를 그리고, 없으면 Google 지도 앱을 엽니다. 주변 탐색은 Google Places 실시간 데이터(영업 여부·평점)를 사용합니다. 운영시간은 2026년 11월 7일 기준이며 방문 전 확인을 권합니다.</p>
     </div>
   </div>
 </footer>
@@ -298,11 +333,12 @@ const P = [
 
 /* ---------- helpers ---------- */
 const $ = s=>document.querySelector(s);
-const esc = s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const esc = s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const gdir = p=>`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}${p.pid?`&destination_place_id=${p.pid}`:''}&travelmode=walking`;
 const gplace = p=>p.pid?`https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}&query_place_id=${p.pid}`:`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('서촌 '+p.n)}`;
 const hav=(a,b,c,d)=>{const r=Math.PI/180,R=6371000,x=(c-a)*r,y=(d-b)*r,s=Math.sin(x/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin(y/2)**2;return 2*R*Math.asin(Math.sqrt(s))};
 const fmt=m=>m<1000?`${Math.round(m)}m · 도보 ${Math.max(1,Math.round(m/75))}분`:`${(m/1000).toFixed(1)}km · 도보 ${Math.round(m/75)}분`;
+const isMobile=()=>window.innerWidth<=900;
 
 function illo(p,i){
   const pale=CAT[p.c].pale, ink='#2F2B26';
@@ -317,7 +353,7 @@ function illo(p,i){
   }else{
     motif=`<g fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="112" y="64" width="96" height="76" rx="2"/><rect x="124" y="76" width="72" height="52"/><path d="M124 128l20-22 14 14 12-10 26 18"/><path d="M160 140v26M140 166h40"/><path d="M236 60c-10 18-6 36 4 48 10-12 14-30 4-48" /><path d="M240 108v22"/></g>`;
   }
-  return `<svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="#F6F4EE"/>${shapes}${motif}<text x="18" y="186" font-family="JetBrains Mono,monospace" font-size="9" fill="#A09A91" letter-spacing="1">${esc(CAT[p.c].label.toUpperCase())} · ${String(i+1).padStart(2,'0')}</text></svg>`;
+  return `<svg viewBox="0 0 320 200" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><rect width="320" height="200" fill="#F6F4EE"/>${shapes}${motif}<text x="18" y="186" font-family="JetBrains Mono,monospace" font-size="9" fill="#A09A91" letter-spacing="1">${esc(CAT[p.c].label.toUpperCase())} · ${String(i+1).padStart(2,'0')}</text></svg>`;
 }
 const ICON={
   pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7.5 7-13a7 7 0 0 0-14 0c0 5.5 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>',
@@ -328,13 +364,15 @@ const ICON={
 
 /* ---------- state ---------- */
 let me=null, cat='all', map=null, markers=[], meMarker=null, infoWin=null, dirSvc=null, dirRend=null, placesSvc=null, mapsReady=false;
+let activeIdx=-1, userPanUntil=0, suppressScrollUntil=0;
+let nearMarkers=[], nearResults=[], nearKind=null;
 const photoCache={};
 P.forEach((p,i)=>p.i=i);
 
 /* ---------- cards ---------- */
 function card(p,i){
   const w=p.w==='good'?'good':p.w==='bad'?'bad':'';
-  return `<article class="card rv" id="p${p.i}" data-cat="${p.c}" style="--i:${i%6}">
+  return `<article class="card rv" id="p${p.i}" data-i="${p.i}" data-cat="${p.c}" style="--i:${i%5}">
     <div class="fig" id="f${p.i}">${illo(p,p.i)}<div class="grain"></div><span class="attr" id="a${p.i}"></span>
       <a class="photo-link" href="${gplace(p)}" target="_blank" rel="noopener">${ICON.photo}사진 보기</a></div>
     <div class="body">
@@ -345,9 +383,9 @@ function card(p,i){
       <div class="hours">${esc(p.h)}</div>
       <div class="tagrow">${p.t.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
       <div class="actions">
-        <button class="btn primary" data-route="${p.i}">${ICON.route}현재 위치에서 길찾기</button>
-        <a class="btn" href="${gdir(p)}" target="_blank" rel="noopener">Google 지도 앱</a>
-        <button class="btn" data-focus="${p.i}">${ICON.map}지도에서 보기</button>
+        <button class="btn sm primary" data-route="${p.i}">${ICON.route}<span class="lbl-long">현재 위치에서&nbsp;</span>길찾기</button>
+        <a class="btn sm" href="${gdir(p)}" target="_blank" rel="noopener">Google 지도 앱</a>
+        <button class="btn sm" data-focus="${p.i}">${ICON.map}지도</button>
       </div>
     </div></article>`;
 }
@@ -359,13 +397,12 @@ function render(){
     if(me) items=[...items].sort((a,b)=>a.dist-b.dist);
     html+=`<section class="section" id="${c}">
       <div class="section-head"><h2><span style="background:${CAT[c].hex}"></span>${CAT[c].label}</h2><p>${items.length} PLACES${me?' · 가까운 순':''}</p></div>
-      <p class="lede" style="margin:-6px 0 18px;font-size:13.5px">${CAT[c].desc}</p>
+      <p class="lede" style="margin:-4px 0 16px;font-size:13.5px">${CAT[c].desc}</p>
       <div class="grid">${items.map((p,i)=>card(p,i)).join('')}</div></section>`;
   });
   $('#list').innerHTML=html;
-  $('#count').textContent=`${cats.reduce((n,c)=>n+P.filter(p=>p.c===c).length,0)} PLACES`;
   if(me) P.forEach(p=>{const el=$('#d'+p.i); if(el){el.textContent=fmt(p.dist);el.classList.add('show')}});
-  observe(); syncMarkers(); applyPhotos();
+  observe(); observeScroll(); syncMarkers(); applyPhotos();
 }
 
 /* ---------- Google Maps ---------- */
@@ -385,14 +422,17 @@ const MAP_STYLE=[
   {featureType:'water',elementType:'geometry',stylers:[{color:'#dfe6ea'}]}
 ];
 function pinIcon(hex,on){
-  const s=on?34:26;
+  const s=on?36:26;
   const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30" width="${s}" height="${s*1.25}"><path d="M12 29s9-9.5 9-16.5A9 9 0 0 0 3 12.5C3 19.5 12 29 12 29z" fill="${hex}" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12.5" r="3.4" fill="#fff"/></svg>`;
   return {url:'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg),scaledSize:new google.maps.Size(s,s*1.25),anchor:new google.maps.Point(s/2,s*1.25)};
 }
+function hollowIcon(hex,on){
+  return {path:google.maps.SymbolPath.CIRCLE,scale:on?9:7,fillColor:'#fff',fillOpacity:1,strokeColor:hex,strokeWeight:on?3.5:2.5};
+}
 function loadMaps(){
   if(!GMAPS_KEY){
-    $('#gmap').innerHTML=`<div class="nokey"><b>Google Maps API 키가 필요합니다</b>index.html 상단 <code>GMAPS_KEY</code>에 키를 넣으면 지도·사진·경로가 활성화됩니다. 키가 없어도 각 카드의 「Google 지도 앱」·「사진 보기」 링크는 작동합니다.</div>`;
-    $('#maphint').textContent='KEY MISSING'; return;
+    $('#gmap').innerHTML=`<div class="nokey"><b>Google Maps API 키가 필요합니다</b>저장소 Secret <code>GMAPS_KEY</code>를 등록하고 Actions로 배포하면 지도·사진·경로·주변 탐색이 활성화됩니다. 키가 없어도 각 카드의 「Google 지도 앱」·「사진 보기」 링크는 작동합니다.</div>`;
+    return;
   }
   window.__initMap=initMap;
   const s=document.createElement('script');
@@ -401,47 +441,80 @@ function loadMaps(){
   document.head.appendChild(s);
 }
 function initMap(){
-  map=new google.maps.Map($('#gmap'),{center:{lat:37.5795,lng:126.9712},zoom:16,styles:MAP_STYLE,mapTypeControl:false,streetViewControl:false,fullscreenControl:true,gestureHandling:'greedy',clickableIcons:false});
+  map=new google.maps.Map($('#gmap'),{center:{lat:37.5795,lng:126.9712},zoom:16,styles:MAP_STYLE,mapTypeControl:false,streetViewControl:false,fullscreenControl:!isMobile(),zoomControl:!isMobile(),gestureHandling:'greedy',clickableIcons:false});
   infoWin=new google.maps.InfoWindow();
   dirSvc=new google.maps.DirectionsService();
   dirRend=new google.maps.DirectionsRenderer({map,suppressMarkers:true,preserveViewport:false,polylineOptions:{strokeColor:'#B5452B',strokeWeight:5,strokeOpacity:.85}});
   placesSvc=new google.maps.places.PlacesService(map);
   markers=P.map(p=>{
     const m=new google.maps.Marker({map,position:{lat:p.lat,lng:p.lng},title:p.n,icon:pinIcon(CAT[p.c].hex,false),optimized:false});
-    m.addListener('click',()=>openInfo(p));
+    m.addListener('click',()=>{ openInfo(p); scrollToCard(p.i); });
     return m;
   });
-  mapsReady=true; $('#maphint').textContent='GOOGLE MAPS';
+  // 사용자가 지도를 직접 움직이는 동안에는 스크롤 연동 팬을 잠시 멈춤
+  map.addListener('dragstart',()=>{userPanUntil=Infinity});
+  map.addListener('dragend',()=>{userPanUntil=Date.now()+3000});
+  mapsReady=true;
   syncMarkers(); applyPhotos();
   if(me) placeMe();
+  if(activeIdx>=0) setActive(activeIdx,false);
 }
-function openInfo(p){
-  focus(p.i,true);
+function iwContent(p){
   const el=document.createElement('div'); el.className='iw';
-  el.innerHTML=`<b>${esc(p.n)}</b><small>${esc(p.a)}${me?' · '+fmt(p.dist):''}</small><button class="primary" data-r="${p.i}">길찾기</button><a href="${gplace(p)}" target="_blank" rel="noopener">Google 지도</a>`;
+  el.innerHTML=`<b>${esc(p.n)}</b><small>${esc(p.a||p.v||'')}${me&&p.dist!=null?' · '+fmt(p.dist):''}</small><button class="primary">길찾기</button><a href="${gplace(p)}" target="_blank" rel="noopener">Google 지도</a>`;
   el.querySelector('button').addEventListener('click',()=>routeTo(p));
-  infoWin.setContent(el); infoWin.open({map,anchor:markers[p.i]});
+  return el;
+}
+function openInfo(p,anchor){
+  if(!mapsReady) return;
+  infoWin.setContent(iwContent(p)); infoWin.open({map,anchor:anchor||markers[p.i]});
 }
 function syncMarkers(){
   if(!mapsReady) return;
-  markers.forEach((m,i)=>{const p=P[i]; m.setVisible(cat==='all'||p.c===cat)});
+  markers.forEach((m,i)=>m.setVisible(cat==='all'||P[i].c===cat));
 }
-function focus(i,fromMap){
-  document.querySelectorAll('.card').forEach(c=>c.classList.remove('focus'));
+/* 활성 장소: 핀 확대 + (옵션) 지도 중앙 이동. 카드 강조는 별도. */
+function setActive(i,pan){
+  activeIdx=i;
+  document.querySelectorAll('.card.active').forEach(c=>c.classList.remove('active'));
+  const el=$('#p'+i); if(el) el.classList.add('active');
+  if(!mapsReady) return;
+  markers.forEach((m,j)=>m.setIcon(pinIcon(CAT[P[j].c].hex,j===i)));
+  if(pan && Date.now()>userPanUntil){ map.panTo({lat:P[i].lat,lng:P[i].lng}); }
+}
+function scrollToCard(i){
   const p=P[i];
   if(cat!=='all'&&p.c!==cat){cat='all';setTab();render()}
-  const el=$('#p'+i); if(el){el.classList.add('focus'); if(fromMap) el.scrollIntoView({behavior:'smooth',block:'center'})}
-  if(mapsReady){
-    markers.forEach((m,j)=>m.setIcon(pinIcon(CAT[P[j].c].hex,j===i)));
-    if(!fromMap){map.panTo({lat:p.lat,lng:p.lng}); if(map.getZoom()<16) map.setZoom(16); openInfoQuiet(p)}
-  }
+  const el=$('#p'+i); if(!el) return;
+  document.querySelectorAll('.card.focus').forEach(c=>c.classList.remove('focus'));
+  el.classList.add('focus'); setTimeout(()=>el.classList.remove('focus'),2200);
+  suppressScrollUntil=Date.now()+1500;
+  setActive(i,false);
+  el.scrollIntoView({behavior:'smooth',block:isMobile()?'start':'center'});
 }
-function openInfoQuiet(p){
-  const el=document.createElement('div'); el.className='iw';
-  el.innerHTML=`<b>${esc(p.n)}</b><small>${esc(p.a)}${me?' · '+fmt(p.dist):''}</small><button class="primary">길찾기</button><a href="${gplace(p)}" target="_blank" rel="noopener">Google 지도</a>`;
-  el.querySelector('button').addEventListener('click',()=>routeTo(p));
-  infoWin.setContent(el); infoWin.open({map,anchor:markers[p.i]});
+/* 카드 → 지도 */
+function focusOnMap(i){
+  setActive(i,true);
+  if(mapsReady){ if(map.getZoom()<16) map.setZoom(16); openInfo(P[i]); }
+  $('#mapbox').classList.remove('collapsed'); $('#toggleMap').textContent='접기';
+  if(isMobile()) window.scrollTo({top:$('#mapbox').getBoundingClientRect().top+window.scrollY-60,behavior:'smooth'});
 }
+
+/* ---------- 스크롤 → 지도: 화면 가운데 띠에 들어온 카드를 활성화 ---------- */
+let sIO;
+function observeScroll(){
+  sIO&&sIO.disconnect();
+  if(!('IntersectionObserver' in window)) return;
+  const band=isMobile()?'-48% 0px -32% 0px':'-42% 0px -42% 0px';
+  sIO=new IntersectionObserver(es=>{
+    if(Date.now()<suppressScrollUntil) return;
+    const hit=es.filter(e=>e.isIntersecting).sort((a,b)=>b.intersectionRatio-a.intersectionRatio)[0];
+    if(!hit) return;
+    const i=+hit.target.dataset.i; if(i!==activeIdx) setActive(i,true);
+  },{rootMargin:band,threshold:[0,.25,.5,.75,1]});
+  document.querySelectorAll('.card').forEach(c=>sIO.observe(c));
+}
+window.addEventListener('resize',()=>{observeScroll()});
 
 /* ---------- photos (Places) ---------- */
 function applyPhotos(){
@@ -468,13 +541,13 @@ function setPhoto(p,ph){
   img.src=ph.url;
 }
 
-/* ---------- location & routing ---------- */
-function placeMe(){
+/* ---------- location ---------- */
+function placeMe(fit){
   if(!mapsReady||!me) return;
   if(!meMarker){
     meMarker=new google.maps.Marker({map,position:me,zIndex:999,title:'내 위치',icon:{path:google.maps.SymbolPath.CIRCLE,scale:8,fillColor:'#2B6CB0',fillOpacity:1,strokeColor:'#fff',strokeWeight:2.5}});
   }else meMarker.setPosition(me);
-  const b=new google.maps.LatLngBounds(me); b.extend({lat:37.5795,lng:126.9712}); map.fitBounds(b,60);
+  if(fit){ const b=new google.maps.LatLngBounds(me); b.extend({lat:37.5795,lng:126.9712}); map.fitBounds(b,60); }
 }
 function locate(){
   return new Promise((res,rej)=>{
@@ -484,38 +557,104 @@ function locate(){
         me={lat:pos.coords.latitude,lng:pos.coords.longitude};
         P.forEach(p=>p.dist=hav(me.lat,me.lng,p.lat,p.lng));
         res(me);
-      },rej,{enableHighAccuracy:true,timeout:10000,maximumAge:60000});
+      },rej,{enableHighAccuracy:true,timeout:10000,maximumAge:30000});
     }catch(e){rej(e)}
   });
 }
 const LOC_ERR='이 화면에서는 위치를 읽을 수 없습니다. 「Google 지도 앱」 버튼은 앱에서 현재 위치를 자동으로 씁니다.';
+function setStatus(msg,cls){const st=$('#status'); st.className='status '+(cls||''); st.textContent=msg;}
 $('#locate').addEventListener('click',async()=>{
-  const st=$('#status'); st.className='status'; st.textContent='위치를 확인하는 중…';
-  try{ await locate(); st.className='status ok'; st.textContent='현재 위치 기준 도보 거리로 정렬했습니다.'; placeMe(); render(); }
-  catch(e){ st.className='status err'; st.textContent=LOC_ERR; }
+  setStatus('위치를 확인하는 중…');
+  try{ await locate(); setStatus('현재 위치 기준 도보 거리로 정렬했습니다. 다시 누르면 위치를 갱신합니다.','ok'); placeMe(true); render(); $('#locate').classList.add('on'); }
+  catch(e){ setStatus(LOC_ERR,'err'); }
 });
+
+/* ---------- routing ---------- */
 async function routeTo(p){
   if(!mapsReady){ window.open(gdir(p),'_blank','noopener'); return; }
-  const bar=$('#routebar');
   if(!me){
-    try{ await locate(); placeMe(); render(); }
-    catch(e){ $('#status').className='status err'; $('#status').textContent=LOC_ERR; window.open(gdir(p),'_blank','noopener'); return; }
+    try{ await locate(); placeMe(false); render(); $('#locate').classList.add('on'); }
+    catch(e){ setStatus(LOC_ERR,'err'); window.open(gdir(p),'_blank','noopener'); return; }
   }
-  $('#routeName').textContent=p.n; $('#routeInfo').textContent='경로 계산 중…'; $('#routeOpen').href=gdir(p); bar.classList.add('show');
-  $('#mapbox').classList.remove('collapsed');
+  $('#routeName').textContent=p.n; $('#routeInfo').textContent='경로 계산 중…'; $('#routeOpen').href=gdir(p); $('#routebar').classList.add('show');
+  $('#mapbox').classList.remove('collapsed'); $('#toggleMap').textContent='접기';
+  userPanUntil=Date.now()+4000; // 경로 뷰를 스크롤 연동이 덮어쓰지 않도록
   dirSvc.route({origin:me,destination:p.pid?{placeId:p.pid}:{lat:p.lat,lng:p.lng},travelMode:google.maps.TravelMode.WALKING},(r,st)=>{
     if(st!=='OK'){ $('#routeInfo').textContent='경로를 만들 수 없어 앱으로 엽니다.'; window.open(gdir(p),'_blank','noopener'); return; }
     dirRend.setDirections(r);
     const leg=r.routes[0].legs[0];
     $('#routeInfo').textContent=`${leg.distance.text} · ${leg.duration.text}`;
-    focus(p.i,true);
+    if(p.i!=null) setActive(p.i,false);
+    if(isMobile()) window.scrollTo({top:0,behavior:'smooth'});
   });
 }
 $('#routeClear').addEventListener('click',()=>{dirRend&&dirRend.set('directions',null);$('#routebar').classList.remove('show')});
+
+/* ---------- 주변 실시간 탐색 (Places Nearby) ---------- */
+const NEAR_TYPES={meal:['restaurant'],cafe:['cafe','bakery'],see:['museum','art_gallery','tourist_attraction','book_store']};
+const NEAR_LABEL={meal:'식당',cafe:'카페',see:'구경'};
+function clearNearby(){
+  nearMarkers.forEach(m=>m.setMap(null)); nearMarkers=[]; nearResults=[]; nearKind=null;
+  $('#nearbyWrap').innerHTML=''; $('#nearClear').style.display='none';
+  document.querySelectorAll('[data-near]').forEach(b=>b.classList.remove('on'));
+}
+function nearbySearch(type,loc,radius){
+  return new Promise(res=>placesSvc.nearbySearch({location:loc,radius,type},(r,st)=>res(st===google.maps.places.PlacesServiceStatus.OK?r:[])));
+}
+async function findNearby(kind){
+  if(!mapsReady){ setStatus('지도가 준비되면 주변 탐색을 쓸 수 있습니다.','err'); return; }
+  if(!me){
+    try{ await locate(); placeMe(false); render(); $('#locate').classList.add('on'); }
+    catch(e){ setStatus(LOC_ERR,'err'); return; }
+  }
+  clearNearby(); nearKind=kind;
+  document.querySelector(`[data-near="${kind}"]`).classList.add('on');
+  const radius=+$('#radius').value;
+  setStatus(`${radius}m 안의 ${NEAR_LABEL[kind]}를 찾는 중…`);
+  $('#nearbyWrap').innerHTML=`<section class="section"><div class="nearby"><div class="nhead"><b>내 주변 ${NEAR_LABEL[kind]}</b><span>SEARCHING…</span></div><div class="nempty">Google Places에서 찾는 중입니다.</div></div></section>`;
+  const lists=await Promise.all(NEAR_TYPES[kind].map(t=>nearbySearch(t,me,radius)));
+  const seen=new Set();
+  nearResults=lists.flat().filter(r=>r.geometry&&r.place_id&&!seen.has(r.place_id)&&seen.add(r.place_id)&&r.business_status!=='CLOSED_PERMANENTLY')
+    .map(r=>({pid:r.place_id,n:r.name,v:r.vicinity||'',lat:r.geometry.location.lat(),lng:r.geometry.location.lng(),rating:r.rating,cnt:r.user_ratings_total,open:r.opening_hours?r.opening_hours.open_now:null,photo:r.photos&&r.photos[0]?r.photos[0].getUrl({maxWidth:160,maxHeight:120}):null,c:kind}))
+    .map(r=>(r.dist=hav(me.lat,me.lng,r.lat,r.lng),r))
+    .filter(r=>r.dist<=radius*1.15)
+    .sort((a,b)=>(b.open===true)-(a.open===true)||a.dist-b.dist).slice(0,15);
+  renderNearby(kind,radius);
+}
+function renderNearby(kind,radius){
+  const hex=CAT[kind].hex;
+  const rows=nearResults.map((r,k)=>`<div class="nrow" data-nk="${k}">
+      ${r.photo?`<img class="nimg" src="${r.photo}" alt="">`:`<div class="nimg"></div>`}
+      <div><div class="nname">${esc(r.n)}</div>
+        <div class="nmeta">${r.rating?`<span>★ ${r.rating}${r.cnt?` (${r.cnt})`:''}</span>`:''}<span class="${r.open===true?'open':r.open===false?'closed':''}">${r.open===true?'영업 중':r.open===false?'영업 종료':'영업 정보 없음'}</span><span>${fmt(r.dist)}</span></div>
+        <div style="font-size:11.5px;color:var(--muted);margin-top:2px">${esc(r.v)}</div></div>
+      <div style="display:flex;flex-direction:column;gap:4px"><button class="btn sm primary" data-nroute="${k}">길찾기</button><a class="btn sm" href="${gplace(r)}" target="_blank" rel="noopener">지도</a></div></div>`).join('');
+  $('#nearbyWrap').innerHTML=`<section class="section"><div class="nearby">
+    <div class="nhead"><b>내 주변 ${NEAR_LABEL[kind]} <span style="font-weight:400;color:var(--muted)">· 반경 ${radius}m</span></b><span>${nearResults.length} FOUND · LIVE</span></div>
+    ${rows||`<div class="nempty">반경 안에서 찾은 ${NEAR_LABEL[kind]}가 없습니다. 반경을 넓혀 보세요.</div>`}</div></section>`;
+  nearMarkers=nearResults.map((r,k)=>{
+    const m=new google.maps.Marker({map,position:{lat:r.lat,lng:r.lng},title:r.n,icon:hollowIcon(hex,false),zIndex:500});
+    m.addListener('click',()=>{ highlightNear(k); openInfo(r,m); const row=document.querySelector(`.nrow[data-nk="${k}"]`); row&&row.scrollIntoView({behavior:'smooth',block:'center'}); });
+    return m;
+  });
+  if(nearResults.length){ const b=new google.maps.LatLngBounds(me); nearResults.forEach(r=>b.extend({lat:r.lat,lng:r.lng})); userPanUntil=Date.now()+4000; map.fitBounds(b,50); }
+  $('#nearClear').style.display='inline-flex';
+  setStatus(`${nearResults.length}곳을 찾았습니다. 영업 중인 곳이 먼저 보입니다.`,'ok');
+  if(isMobile()) $('#nearbyWrap').scrollIntoView({behavior:'smooth',block:'start'});
+}
+function highlightNear(k){
+  document.querySelectorAll('.nrow').forEach(r=>r.classList.toggle('on',+r.dataset.nk===k));
+  nearMarkers.forEach((m,j)=>m.setIcon(hollowIcon(CAT[nearKind].hex,j===k)));
+}
 document.addEventListener('click',e=>{
+  const nb=e.target.closest('[data-near]'); if(nb){findNearby(nb.dataset.near); return}
+  const nr=e.target.closest('[data-nroute]'); if(nr){routeTo(nearResults[+nr.dataset.nroute]); return}
+  const row=e.target.closest('.nrow'); if(row){const k=+row.dataset.nk; highlightNear(k); if(mapsReady){userPanUntil=Date.now()+2500; map.panTo({lat:nearResults[k].lat,lng:nearResults[k].lng}); openInfo(nearResults[k],nearMarkers[k])} return}
   const r=e.target.closest('[data-route]'); if(r){routeTo(P[+r.dataset.route]); return}
-  const f=e.target.closest('[data-focus]'); if(f){focus(+f.dataset.focus,false); $('#mapbox').classList.remove('collapsed'); window.scrollTo({top:0,behavior:'smooth'})}
+  const f=e.target.closest('[data-focus]'); if(f){focusOnMap(+f.dataset.focus)}
 });
+$('#nearClear').addEventListener('click',clearNearby);
+$('#radius').addEventListener('change',()=>{if(nearKind) findNearby(nearKind)});
 $('#toggleMap').addEventListener('click',e=>{const c=$('#mapbox').classList.toggle('collapsed'); e.target.textContent=c?'펼치기':'접기'; if(!c&&map) google.maps.event.trigger(map,'resize')});
 
 /* ---------- tabs / hash ---------- */
@@ -529,7 +668,7 @@ let io;
 function observe(){
   if(!('IntersectionObserver' in window)){document.querySelectorAll('.rv').forEach(e=>e.classList.add('in'));return}
   io&&io.disconnect();
-  io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{rootMargin:'0px 0px -8% 0px'});
+  io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting){en.target.classList.add('in');io.unobserve(en.target)}}),{rootMargin:'0px 0px -6% 0px'});
   document.querySelectorAll('.rv').forEach(e=>io.observe(e));
 }
 
