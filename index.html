@@ -24,7 +24,6 @@
   a{color:inherit}
   button{font-family:inherit}
 
-  /* ambient */
   .ambient{position:fixed;inset:0;pointer-events:none;z-index:0;overflow:hidden}
   .ambient span{position:absolute;border-radius:50%;filter:blur(60px);opacity:.14}
   .ambient .a1{width:52vw;height:52vw;left:-18vw;top:-14vw;background:#E9B46A}
@@ -37,7 +36,6 @@
 
   .wrap{position:relative;z-index:1;max-width:1180px;margin:0 auto;padding:0 20px}
 
-  /* top bar */
   .top{position:sticky;top:0;z-index:20;background:rgba(251,251,250,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid var(--line)}
   .top .wrap{display:flex;align-items:center;justify-content:space-between;height:56px;gap:12px}
   .brand{font-family:var(--serif);font-weight:600;letter-spacing:-.02em;font-size:17px;white-space:nowrap}
@@ -50,7 +48,6 @@
   .tab .dot{display:inline-block;width:7px;height:7px;border-radius:50%;margin-right:6px;vertical-align:1px}
   .tab:active{transform:scale(.98)}
 
-  /* hero */
   .hero{padding:56px 0 36px;display:grid;grid-template-columns:1.3fr 1fr;gap:40px;align-items:end}
   .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--maple);margin:0 0 14px}
   h1{font-family:var(--serif);font-weight:600;font-size:clamp(30px,4.6vw,52px);line-height:1.12;letter-spacing:-.03em;margin:0 0 18px}
@@ -65,7 +62,6 @@
   .pill.cafe{background:var(--ginkgo-pale);color:#7E5A14}
   .pill.see{background:var(--moss-pale);color:#46522F}
 
-  /* toolbar */
   .toolbar{display:flex;flex-wrap:wrap;gap:10px;align-items:center;justify-content:space-between;padding:18px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-bottom:28px}
   .toolbar .left{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
   .btn{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:8px 12px;font-size:13px;font-weight:500;cursor:pointer;display:inline-flex;align-items:center;gap:7px;transition:all .2s var(--ease);text-decoration:none;color:var(--ink)}
@@ -73,12 +69,12 @@
   .btn:active{transform:scale(.98)}
   .btn.primary{background:var(--ink);color:#fff;border-color:var(--ink)}
   .btn.primary:hover{background:#333}
+  .btn[disabled]{opacity:.5;cursor:default}
   .btn svg{width:15px;height:15px}
   .status{font-family:var(--mono);font-size:11.5px;color:var(--muted);letter-spacing:.02em}
   .status.ok{color:var(--moss)}
   .status.err{color:var(--maple)}
 
-  /* layout */
   .main{display:grid;grid-template-columns:1fr 440px;gap:36px;align-items:start;padding-bottom:96px}
   .list{min-width:0}
   .section{margin-bottom:52px}
@@ -96,7 +92,13 @@
   .fig{position:relative;background:#F4F2EC;aspect-ratio:4/3;overflow:hidden}
   .grid .card:nth-child(5n+1) .fig{aspect-ratio:auto;min-height:220px;height:100%}
   .fig svg{width:100%;height:100%;display:block}
+  .fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;transition:opacity .6s var(--ease);filter:saturate(.88)}
+  .fig img.in{opacity:1}
   .fig .grain{position:absolute;inset:0;background:radial-gradient(circle at 30% 20%,rgba(255,220,160,.35),transparent 60%);pointer-events:none}
+  .fig.has-photo .grain{background:linear-gradient(to top,rgba(31,29,26,.28),transparent 45%)}
+  .fig .attr{position:absolute;left:10px;bottom:9px;font-size:10px;color:rgba(255,255,255,.85);display:none;max-width:60%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  .fig .attr a{color:inherit}
+  .fig.has-photo .attr{display:block}
   .fig .photo-link{position:absolute;right:10px;bottom:10px;background:rgba(255,255,255,.9);border:1px solid var(--line);border-radius:6px;padding:5px 9px;font-size:11.5px;font-weight:500;text-decoration:none;display:inline-flex;gap:5px;align-items:center}
   .fig .photo-link svg{width:12px;height:12px}
   .body{padding:18px 20px 16px;display:flex;flex-direction:column;gap:10px}
@@ -117,46 +119,31 @@
   .tagrow{display:flex;gap:5px;flex-wrap:wrap}
   .tag{font-size:11px;color:var(--muted);border:1px solid var(--line);border-radius:9999px;padding:2px 8px}
 
-  /* map */
   .mapcol{position:sticky;top:72px}
-  .mapbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden}
-  .mapbox .maphead{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
-  .mapbox .maphead b{font-size:13px;font-weight:600}
-  .mapbox .maphead span{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em}
-  .mapbox svg{display:block;width:100%;height:auto;background:#FBFAF6}
+  .mapbox{background:var(--surface);border:1px solid var(--line);border-radius:12px;overflow:hidden;display:flex;flex-direction:column}
+  .maphead{display:flex;justify-content:space-between;align-items:center;padding:12px 14px;border-bottom:1px solid var(--line)}
+  .maphead b{font-size:13px;font-weight:600}
+  .maphead span{font-family:var(--mono);font-size:10.5px;color:var(--muted);letter-spacing:.04em}
+  #gmap{height:520px;background:#F3F1EB}
+  .nokey{padding:28px 22px;font-size:13px;color:var(--muted);line-height:1.6}
+  .nokey b{color:var(--ink);display:block;margin-bottom:6px}
+  .nokey code{font-family:var(--mono);font-size:11.5px;background:#F7F6F3;border:1px solid var(--line);border-radius:4px;padding:1px 5px}
   .legend{display:flex;gap:14px;padding:10px 14px;border-top:1px solid var(--line);font-size:11.5px;color:var(--muted);flex-wrap:wrap}
   .legend i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:5px}
-  .mk{cursor:pointer}
-  .mk circle.ring{fill:none;stroke-width:1.5;opacity:0}
-  .mk:hover circle.ring,.mk.on circle.ring{opacity:1}
-  .mk.dim{opacity:.18}
-  .mk text{font-family:var(--sans);font-size:9.5px;fill:var(--ink);pointer-events:none;paint-order:stroke;stroke:#FBFAF6;stroke-width:3px;stroke-linejoin:round;opacity:0}
-  .mk.on text,.mk:hover text{opacity:1}
-  .road{stroke:#DCD8CF;stroke-width:3;fill:none;stroke-linecap:round}
-  .road.main{stroke:#CFCAC0;stroke-width:5}
-  .roadlabel{font-family:var(--mono);font-size:9px;fill:#A09A91;letter-spacing:.04em}
-  .area{fill:#F1EDE2;stroke:#DDD6C6;stroke-width:1}
-  .area.mtn{fill:#E9ECDF;stroke:none}
-  .arealabel{font-family:var(--serif);font-size:11px;fill:#8C8577}
-  .me{display:none}
-  .me.show{display:block}
-  @media (prefers-reduced-motion:no-preference){
-    .me .pulse{animation:pulse 2.2s ease-out infinite;transform-origin:center;transform-box:fill-box}
-  }
-  @keyframes pulse{0%{transform:scale(.6);opacity:.7}100%{transform:scale(2.2);opacity:0}}
-  .mapnote{padding:10px 14px;font-size:12px;color:var(--muted);border-top:1px solid var(--line);line-height:1.5}
+  .routebar{display:none;align-items:center;justify-content:space-between;gap:10px;padding:10px 14px;border-top:1px solid var(--line);font-size:12.5px}
+  .routebar.show{display:flex}
+  .routebar b{font-weight:600}
+  .routebar span{font-family:var(--mono);font-size:11px;color:var(--moss)}
+  .routebar .btn{padding:5px 9px;font-size:11.5px}
+  .iw{font-family:var(--sans);max-width:220px}
+  .iw b{display:block;font-size:14px;margin-bottom:2px}
+  .iw small{display:block;color:#7A7570;font-size:11.5px;margin-bottom:8px}
+  .iw a,.iw button{font-family:inherit;font-size:12px;border:1px solid #EAE7E1;background:#fff;border-radius:5px;padding:5px 8px;cursor:pointer;text-decoration:none;color:#1F1D1A;margin-right:4px}
+  .iw button.primary{background:#1F1D1A;color:#fff;border-color:#1F1D1A}
 
-  /* footer */
   footer{border-top:1px solid var(--line);padding:28px 0 60px;color:var(--muted);font-size:12.5px}
   footer .wrap{display:grid;grid-template-columns:1fr 1fr;gap:24px}
-  footer ul{margin:8px 0 0;padding-left:16px}
-  footer li{margin:2px 0}
 
-  /* mobile map fab + sheet */
-  .fab{display:none}
-  .sheet{display:none}
-
-  /* reveal */
   @media (prefers-reduced-motion:no-preference){
     .rv{opacity:0;transform:translateY(12px);transition:opacity .6s var(--ease),transform .6s var(--ease);transition-delay:calc(var(--i,0)*70ms)}
     .rv.in{opacity:1;transform:none}
@@ -165,22 +152,21 @@
   @media (max-width:900px){
     .hero{grid-template-columns:1fr;gap:22px;padding:36px 0 24px}
     .hero-aside{border-left:0;padding-left:0;border-top:1px solid var(--line);padding-top:18px}
-    .main{grid-template-columns:1fr;gap:0}
-    .mapcol{display:none}
+    .main{grid-template-columns:1fr;gap:20px}
+    .mapcol{order:-1;position:sticky;top:56px;z-index:10}
+    .mapbox{border-radius:10px;box-shadow:0 6px 20px rgba(40,20,5,.08)}
+    #gmap{height:280px;transition:height .3s var(--ease)}
+    .mapbox.collapsed #gmap{height:0}
+    .mapbox.collapsed .legend,.mapbox.collapsed .routebar{display:none}
+    .maphead button{display:inline-flex}
     .grid{grid-template-columns:1fr}
     .grid .card:nth-child(5n+1){grid-column:auto;grid-template-columns:1fr}
     .grid .card:nth-child(5n+1) .fig{aspect-ratio:16/9;min-height:0;height:auto}
-    .fab{display:inline-flex;position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom));z-index:30;box-shadow:0 6px 20px rgba(40,20,5,.12)}
-    .sheet{display:block;position:fixed;inset:0;z-index:40;background:rgba(31,29,26,.35);opacity:0;pointer-events:none;transition:opacity .25s var(--ease)}
-    .sheet.open{opacity:1;pointer-events:auto}
-    .sheet .panel{position:absolute;left:0;right:0;bottom:0;background:var(--surface);border-radius:16px 16px 0 0;max-height:88vh;overflow:auto;transform:translateY(20px);transition:transform .3s var(--ease);padding-bottom:env(safe-area-inset-bottom)}
-    .sheet.open .panel{transform:none}
-    .sheet .panel .mapbox{border:0;border-radius:0}
     .brand small{display:none}
+    footer .wrap{grid-template-columns:1fr}
   }
-  @media (max-width:420px){
-    .tab{padding:7px 9px;font-size:12.5px}
-  }
+  .maphead button{display:none}
+  @media (max-width:420px){ .tab{padding:7px 9px;font-size:12.5px} }
 </style>
 </head>
 <body>
@@ -220,7 +206,7 @@
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3"/><circle cx="12" cy="12" r="8"/></svg>
         내 위치 표시 · 거리순 정렬
       </button>
-      <span class="status" id="status">위치 권한을 허용하면 각 장소까지 도보 거리가 표시됩니다.</span>
+      <span class="status" id="status">위치 권한을 허용하면 지도에 내 위치가 뜨고 각 장소까지 도보 거리가 표시됩니다.</span>
     </div>
     <span class="status" id="count"></span>
   </div>
@@ -229,7 +215,12 @@
     <div class="list" id="list"></div>
 
     <div class="mapcol">
-      <div class="mapbox" id="mapbox-desktop"></div>
+      <div class="mapbox" id="mapbox">
+        <div class="maphead"><b>서촌 지도</b><span id="maphint">GOOGLE MAPS</span><button class="btn" id="toggleMap" style="padding:4px 9px;font-size:11.5px">접기</button></div>
+        <div id="gmap"></div>
+        <div class="routebar" id="routebar"><div><b id="routeName"></b> <span id="routeInfo"></span></div><div style="display:flex;gap:6px"><a class="btn" id="routeOpen" href="#" target="_blank" rel="noopener">앱에서 열기</a><button class="btn" id="routeClear">경로 지우기</button></div></div>
+        <div class="legend"><span><i style="background:#B5452B"></i>식사</span><span><i style="background:#B8862B"></i>카페</span><span><i style="background:#5F6B45"></i>구경</span><span><i style="background:#2B6CB0"></i>내 위치</span></div>
+      </div>
     </div>
   </div>
 </main>
@@ -238,28 +229,24 @@
   <div class="wrap">
     <div>
       <b style="color:var(--ink)">사진에 대하여</b>
-      <p>이 페이지는 외부 이미지를 불러오지 않습니다. 각 카드의 그림은 장소 분위기를 나타내는 일러스트이고, 실제 사진은 카드의 「사진 보기」로 네이버 지도에서 바로 확인할 수 있습니다.</p>
+      <p>각 카드의 사진은 Google 지도(Places)에서 가져옵니다. 사진이 없는 곳은 일러스트로 두고, 「사진 보기」로 Google 지도의 장소 페이지를 엽니다.</p>
     </div>
     <div>
       <b style="color:var(--ink)">길찾기에 대하여</b>
-      <p>「현재 위치에서 길찾기」는 구글 지도 앱·웹을 열어 기기의 현재 위치를 출발점으로 도보 경로를 만듭니다. 카카오맵 링크도 함께 제공합니다. 운영시간은 2026년 11월 7일 기준이며, 방문 전 확인을 권합니다.</p>
+      <p>「현재 위치에서 길찾기」는 위치 권한이 있으면 지도 위에 도보 경로를 그리고, 없으면 Google 지도 앱을 열어 기기 위치를 출발점으로 경로를 만듭니다. 운영시간은 2026년 11월 7일 기준이며 방문 전 확인을 권합니다.</p>
     </div>
   </div>
 </footer>
 
-<button class="btn primary fab" id="fab">
-  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-5.5-2.5V4L9 6.5 15 4l5.5 2.5V20L15 17.5 9 20z"/><path d="M9 6.5V20M15 4v13.5"/></svg>
-  지도
-</button>
-<div class="sheet" id="sheet" aria-hidden="true">
-  <div class="panel">
-    <div class="mapbox" id="mapbox-mobile"></div>
-    <div style="padding:12px 14px"><button class="btn" id="closeSheet" style="width:100%;justify-content:center">닫기</button></div>
-  </div>
-</div>
-
 <script>
-/* ---------- data ---------- */
+/* ============ CONFIG ============
+   Google Cloud 콘솔에서 발급한 API 키를 넣으세요.
+   필요한 API: Maps JavaScript API, Places API, Directions API
+   키 제한: HTTP 리퍼러 → https://streqmin.github.io/* (및 로컬 테스트 주소)      */
+const GMAPS_KEY = '';
+const PHOTOS_FROM_PLACES = true;   // Places 사진 불러오기 (요청당 과금 주의, 끄려면 false)
+/* ================================ */
+
 const CAT = {
   meal:{label:'식사',color:'var(--maple)',hex:'#B5452B',pale:'#F8E6DF',desc:'대기 30분 안쪽을 기준으로 골랐습니다. 두 곳씩 붙어 있어 플랜 B가 바로 됩니다.'},
   cafe:{label:'카페',color:'var(--ginkgo)',hex:'#B8862B',pale:'#F7EBCF',desc:'자리 확보가 쉬운 곳과, 사진은 좋지만 대기가 긴 곳을 구분했습니다.'},
@@ -268,56 +255,55 @@ const CAT = {
 const WAIT = {good:'대기 짧음',mid:'대기 보통',bad:'대기 김'};
 const P = [
  // ---- meal
- {c:'meal',n:'체부동 수제비와 보리밥',a:'종로구 자하문로5길 16',lat:37.5777458,lng:126.9710333,h:'토 11:20–19:00 · 일 휴무',w:'good',d:'감자수제비·보리밥·도토리전. 세트를 시키면 수제비와 보리밥이 함께 나옵니다. 좌석이 넉넉하고 회전이 빨라 점심 1순위.',t:['한식','채식 친화','회전 빠름']},
- {c:'meal',n:'체부동잔치집 본점',a:'종로구 자하문로1길 16',lat:37.5765035,lng:126.9715134,h:'매일 10:00–22:00',w:'good',d:'잔치국수·부추전·들깨수제비·만두. 줄이 있어도 10~20분이면 들어갑니다. 저녁엔 전에 막걸리까지.',t:['노포','가성비','저녁 가능']},
- {c:'meal',n:'효자동밥상',a:'종로구 자하문로 62',lat:37.5816245,lng:126.9710147,h:'토 10:30–19:00 · 일 휴무',w:'mid',d:'매일 바뀌는 한정식 백반을 한옥에서. 규모가 작아 12시 정각 도착을 권합니다.',t:['한정식','한옥']},
- {c:'meal',n:'소이로움',a:'종로구 필운대로 41',lat:37.5796649,lng:126.968569,h:'토 11:30–15:00 / 17:00–20:00',w:'mid',d:'비건 양식. 라구 파스타·패티 버거. 음식이 빨리 나오고 사장님이 친절합니다. 매장이 작아 세 명이면 전화 후 방문.',t:['비건','양식']},
+ {c:'meal',n:'체부동 수제비와 보리밥',pid:'ChIJocz39JWifDURy4AKd5hTtAU',a:'종로구 자하문로5길 16',lat:37.5777458,lng:126.9710333,h:'토 11:20–19:00 · 일 휴무',w:'good',d:'감자수제비·보리밥·도토리전. 세트를 시키면 수제비와 보리밥이 함께 나옵니다. 좌석이 넉넉하고 회전이 빨라 점심 1순위.',t:['한식','채식 친화','회전 빠름']},
+ {c:'meal',n:'체부동잔치집 본점',pid:'ChIJzx9qx5WifDURxbul4SlRdgY',a:'종로구 자하문로1길 16',lat:37.5765035,lng:126.9715134,h:'매일 10:00–22:00',w:'good',d:'잔치국수·부추전·들깨수제비·만두. 줄이 있어도 10~20분이면 들어갑니다. 저녁엔 전에 막걸리까지.',t:['노포','가성비','저녁 가능']},
+ {c:'meal',n:'효자동밥상',pid:'ChIJK8Jg-_ujfDURhoL2dQELxQ8',a:'종로구 자하문로 62',lat:37.5816245,lng:126.9710147,h:'토 10:30–19:00 · 일 휴무',w:'mid',d:'매일 바뀌는 한정식 백반을 한옥에서. 규모가 작아 12시 정각 도착을 권합니다.',t:['한정식','한옥']},
+ {c:'meal',n:'소이로움',pid:'ChIJcTL5jb2ifDURVJXytCQr6Jk',a:'종로구 필운대로 41',lat:37.5796649,lng:126.968569,h:'토 11:30–15:00 / 17:00–20:00',w:'mid',d:'비건 양식. 라구 파스타·패티 버거. 음식이 빨리 나오고 사장님이 친절합니다. 매장이 작아 세 명이면 전화 후 방문.',t:['비건','양식']},
  {c:'meal',n:'통인시장 엽전도시락',a:'종로구 자하문로15길 18',lat:37.5806,lng:126.9700,h:'도시락카페 11:00–15:00',w:'good',d:'엽전을 사서 시장 반찬을 골라 담는 체험형 점심. 줄이 점포별로 분산되어 체감 대기가 짧습니다. 셋이 다른 걸 골라 나눠 먹기 좋아요.',t:['시장','체험','기름떡볶이']},
- {c:'meal',n:'서촌식당',a:'종로구 옥인동 19-50',lat:37.5814202,lng:126.9699977,h:'토 11:30–15:00 · 일 휴무',w:'bad',d:'제육볶음과 오늘의 메뉴. 평점은 서촌 최고지만 대기가 길고 토요일 3시에 닫습니다. 꼭 가고 싶다면 11:30 오픈런.',t:['한식','오픈런']},
- {c:'meal',n:'체부동잔치집 돼지갈비',a:'종로구 체부동 194-2',lat:37.5764765,lng:126.971053,h:'매일 11:00–22:30',w:'good',d:'저녁 후보. 양 많은 돼지갈비·소갈비, 돌솥비빔밥. 저녁 6시 반에 첫 손님으로 들어가면 여유 있습니다.',t:['고기','저녁 추천']},
+ {c:'meal',n:'서촌식당',pid:'ChIJk3SfLzqjfDUR3kpZIlmXeQE',a:'종로구 옥인동 19-50',lat:37.5814202,lng:126.9699977,h:'토 11:30–15:00 · 일 휴무',w:'bad',d:'제육볶음과 오늘의 메뉴. 평점은 서촌 최고지만 대기가 길고 토요일 3시에 닫습니다. 꼭 가고 싶다면 11:30 오픈런.',t:['한식','오픈런']},
+ {c:'meal',n:'체부동잔치집 돼지갈비',pid:'ChIJfSK_XISjfDURVvZdZy9WjHY',a:'종로구 체부동 194-2',lat:37.5764765,lng:126.971053,h:'매일 11:00–22:30',w:'good',d:'저녁 후보. 양 많은 돼지갈비·소갈비, 돌솥비빔밥. 저녁 6시 반에 첫 손님으로 들어가면 여유 있습니다.',t:['고기','저녁 추천']},
  // ---- cafe
- {c:'cafe',n:'이도림 경복궁 본점',a:'종로구 자하문로 43',lat:37.5799476,lng:126.9710654,h:'매일 08:00–21:00',w:'good',d:'이끼 덮인 화산 조형물과 안개. 본관·별관·테라스로 공간이 많아 셋이 앉을 자리가 거의 항상 있습니다. 사진과 수다를 둘 다 챙기는 곳.',t:['대형','테라스','릴스 단골']},
- {c:'cafe',n:'카페보안',a:'종로구 효자로 33 보안여관 신관 1층',lat:37.5789667,lng:126.9736909,h:'매일 08:00–19:00',w:'good',d:'1936년 여관 건물의 복합문화공간. 효자로 은행나무길이 통창으로 보여 단풍과 수다를 한자리에서. 커피보다 차를 권합니다.',t:['통창 단풍뷰','조용함','서점·전시']},
- {c:'cafe',n:'미술관옆집',a:'종로구 자하문로4길 22',lat:37.5772756,lng:126.9734758,h:'토 11:00–20:00 · 월 휴무',w:'good',d:'대림미술관 바로 옆. 1층 소파석이 편하고 스피커 음악이 좋습니다. 2층은 스툴이라 1층을 노리세요.',t:['소파','전시 세트']},
- {c:'cafe',n:'엠엔에이 서촌',a:'종로구 자하문로 74',lat:37.5825139,lng:126.9708972,h:'토 12:00–23:00 · 월 휴무',w:'good',d:'빈티지 가구 쇼룸 겸 카페·바. 방마다 파랑·초록·앰버로 색이 바뀌고 거울이 깊이를 만듭니다. 밤 11시까지라 저녁 후 한 잔까지.',t:['쇼룸','저녁 이후','사진']},
- {c:'cafe',n:'베어카페',a:'종로구 자하문로24길 24',lat:37.5828421,lng:126.9711398,h:'운영시간 현장 확인',w:'good',d:'킨포크 출판사가 운영하는 한옥 카페. 마당과 고양이, 작은 서점. 주택가 안이라 한적합니다.',t:['한옥','마당','조용함']},
- {c:'cafe',n:'놋그릇가지런히',a:'종로구 자하문로13길 3',lat:37.5799691,lng:126.9709288,h:'토 10:00–19:00 · 일 휴무',w:'good',d:'한국식 디저트를 놋그릇에 담아 내는 차분한 카페. 오래 앉아도 눈치 보이지 않습니다.',t:['한식 디저트','차분함']},
+ {c:'cafe',n:'이도림 경복궁 본점',pid:'ChIJawHWb_ejfDURUJC1B80y29g',a:'종로구 자하문로 43',lat:37.5799476,lng:126.9710654,h:'매일 08:00–21:00',w:'good',d:'이끼 덮인 화산 조형물과 안개. 본관·별관·테라스로 공간이 많아 셋이 앉을 자리가 거의 항상 있습니다. 사진과 수다를 둘 다 챙기는 곳.',t:['대형','테라스','릴스 단골']},
+ {c:'cafe',n:'카페보안',pid:'ChIJA1CElUCjfDURouniCAsMAes',a:'종로구 효자로 33 보안여관 신관 1층',lat:37.5789667,lng:126.9736909,h:'매일 08:00–19:00',w:'good',d:'1936년 여관 건물의 복합문화공간. 효자로 은행나무길이 통창으로 보여 단풍과 수다를 한자리에서. 커피보다 차를 권합니다.',t:['통창 단풍뷰','조용함','서점·전시']},
+ {c:'cafe',n:'미술관옆집',pid:'ChIJJb-Rpb-ifDURPP86PeRxK5k',a:'종로구 자하문로4길 22',lat:37.5772756,lng:126.9734758,h:'토 11:00–20:00 · 월 휴무',w:'good',d:'대림미술관 바로 옆. 1층 소파석이 편하고 스피커 음악이 좋습니다. 2층은 스툴이라 1층을 노리세요.',t:['소파','전시 세트']},
+ {c:'cafe',n:'엠엔에이 서촌',pid:'ChIJ9ylZrHKjfDURDr0248ROGMw',a:'종로구 자하문로 74',lat:37.5825139,lng:126.9708972,h:'토 12:00–23:00 · 월 휴무',w:'good',d:'빈티지 가구 쇼룸 겸 카페·바. 방마다 파랑·초록·앰버로 색이 바뀌고 거울이 깊이를 만듭니다. 밤 11시까지라 저녁 후 한 잔까지.',t:['쇼룸','저녁 이후','사진']},
+ {c:'cafe',n:'베어카페',pid:'ChIJu1XATLmifDUR3pP9Y0ULP2s',a:'종로구 자하문로24길 24',lat:37.5828421,lng:126.9711398,h:'운영시간 현장 확인',w:'good',d:'킨포크 출판사가 운영하는 한옥 카페. 마당과 고양이, 작은 서점. 주택가 안이라 한적합니다.',t:['한옥','마당','조용함']},
+ {c:'cafe',n:'놋그릇가지런히',pid:'ChIJd3vkb76ifDURudoyo_6PzMA',a:'종로구 자하문로13길 3',lat:37.5799691,lng:126.9709288,h:'토 10:00–19:00 · 일 휴무',w:'good',d:'한국식 디저트를 놋그릇에 담아 내는 차분한 카페. 오래 앉아도 눈치 보이지 않습니다.',t:['한식 디저트','차분함']},
  {c:'cafe',n:'대충유원지',a:'종로구 필운대로 46',lat:37.5797,lng:126.9688,h:'운영시간 현장 확인',w:'mid',d:'건물 위층 테라스에서 서촌 지붕과 인왕산, 노을. 좌석이 적어 만석일 수 있고 의자가 편한 편은 아닙니다.',t:['뷰','노을','루프탑']},
- {c:'cafe',n:'비발라',a:'종로구 자하문로1길 50',lat:37.5769254,lng:126.9697077,h:'토 08:00–18:00 · 월 휴무',w:'mid',d:'LP와 빈티지 오디오, 소금라떼와 타마고샌드. 체부동 식당가 안에 있어 점심 직후 한 잔에 알맞습니다.',t:['LP','소금라떼','점심 직후']},
- {c:'cafe',n:'카멜커피 서촌',a:'종로구 효자로 31',lat:37.5787903,lng:126.9737128,h:'매일 08:00–21:00',w:'mid',d:'옛 우체국을 개조. 경복궁 담장 뷰 야외석이 은행나무길 바로 앞입니다. 작지만 회전이 빨라 테이크아웃에 좋아요.',t:['은행나무길','테이크아웃']},
- {c:'cafe',n:'스태픽스',a:'종로구 사직로9길 22',lat:37.5774665,lng:126.9679737,h:'매일 10:00–20:30',w:'bad',d:'마당 한가운데 큰 은행나무. 지금 가장 시즌인 카페지만 주말엔 음료만 40분. 마당 사진만 찍고 다른 곳에서 앉는 전략을.',t:['은행나무','웨이팅']},
- {c:'cafe',n:'부트카페 서촌',a:'종로구 자하문로 46',lat:37.5800441,lng:126.9715123,h:'토 11:00–19:00 · 월 휴무',w:'mid',d:'파리 부트카페의 한옥 버전. 중정 테라스와 부츠 모양 코코아 라떼. 좌석이 나뉘어 있어 셋이 나란히 앉기는 운.',t:['한옥','중정']},
- {c:'cafe',n:'33apartment',a:'종로구 자하문로11길 21-16',lat:37.5798736,lng:126.9696449,h:'매일 08:00–20:00',w:'mid',d:'한옥과 중정 테라스, 필터커피와 시나몬롤. 동네 주민들이 커피를 가장 진지하게 하는 곳으로 꼽습니다. 테이블은 많지 않습니다.',t:['필터커피','시나몬롤']},
- {c:'cafe',n:'시노라 서촌점',a:'종로구 자하문로 116',lat:37.5862156,lng:126.9701072,h:'매일 08:00–17:00',w:'bad',d:'LP 재즈가 흐르는 브런치 카페. 프렌치토스트와 오믈렛. 내부가 좁아 평일 오후에도 30분 대기, 5시에 닫습니다.',t:['브런치','재즈','웨이팅']},
- {c:'cafe',n:'소울에게',a:'종로구 필운대로5길 11',lat:37.5793082,lng:126.9680918,h:'정보 미확인',w:'mid',d:'베이커리로 등록된 새 공간. 운영시간·좌석 정보가 아직 거의 없어 지나는 길에 열려 있으면 들르는 정도로.',t:['신상','확인 필요']},
+ {c:'cafe',n:'비발라',pid:'ChIJlZASVgCjfDURqzPLvEtann0',a:'종로구 자하문로1길 50',lat:37.5769254,lng:126.9697077,h:'토 08:00–18:00 · 월 휴무',w:'mid',d:'LP와 빈티지 오디오, 소금라떼와 타마고샌드. 체부동 식당가 안에 있어 점심 직후 한 잔에 알맞습니다.',t:['LP','소금라떼','점심 직후']},
+ {c:'cafe',n:'카멜커피 서촌',pid:'ChIJM-7_MgCjfDUR6GpImDTSSxU',a:'종로구 효자로 31',lat:37.5787903,lng:126.9737128,h:'매일 08:00–21:00',w:'mid',d:'옛 우체국을 개조. 경복궁 담장 뷰 야외석이 은행나무길 바로 앞입니다. 작지만 회전이 빨라 테이크아웃에 좋아요.',t:['은행나무길','테이크아웃']},
+ {c:'cafe',n:'스태픽스',pid:'ChIJv-8Tc2GjfDUReEephsYVUnk',a:'종로구 사직로9길 22',lat:37.5774665,lng:126.9679737,h:'매일 10:00–20:30',w:'bad',d:'마당 한가운데 큰 은행나무. 지금 가장 시즌인 카페지만 주말엔 음료만 40분. 마당 사진만 찍고 다른 곳에서 앉는 전략을.',t:['은행나무','웨이팅']},
+ {c:'cafe',n:'부트카페 서촌',pid:'ChIJQTusHgGjfDURTGLvUt2rkOM',a:'종로구 자하문로 46',lat:37.5800441,lng:126.9715123,h:'토 11:00–19:00 · 월 휴무',w:'mid',d:'파리 부트카페의 한옥 버전. 중정 테라스와 부츠 모양 코코아 라떼. 좌석이 나뉘어 있어 셋이 나란히 앉기는 운.',t:['한옥','중정']},
+ {c:'cafe',n:'33apartment',pid:'ChIJJ3ZZ8LGjfDURRCc61pDiOoY',a:'종로구 자하문로11길 21-16',lat:37.5798736,lng:126.9696449,h:'매일 08:00–20:00',w:'mid',d:'한옥과 중정 테라스, 필터커피와 시나몬롤. 동네 주민들이 커피를 가장 진지하게 하는 곳으로 꼽습니다. 테이블은 많지 않습니다.',t:['필터커피','시나몬롤']},
+ {c:'cafe',n:'시노라 서촌점',pid:'ChIJpz4l9CujfDURl6517D76CnY',a:'종로구 자하문로 116',lat:37.5862156,lng:126.9701072,h:'매일 08:00–17:00',w:'bad',d:'LP 재즈가 흐르는 브런치 카페. 프렌치토스트와 오믈렛. 내부가 좁아 평일 오후에도 30분 대기, 5시에 닫습니다.',t:['브런치','재즈','웨이팅']},
+ {c:'cafe',n:'소울에게',pid:'ChIJhUBJWgCjfDURnAiDO4KNBpc',a:'종로구 필운대로5길 11',lat:37.5793082,lng:126.9680918,h:'정보 미확인',w:'mid',d:'베이커리로 등록된 새 공간. 운영시간·좌석 정보가 아직 거의 없어 지나는 길에 열려 있으면 들르는 정도로.',t:['신상','확인 필요']},
  // ---- see
  {c:'see',n:'효자로 은행나무길',a:'종로구 효자로 (경복궁 서쪽 담장)',lat:37.5800,lng:126.9742,h:'상시 · 오전~이른 오후 빛이 좋음',w:'good',d:'경복궁 돌담을 따라 노란 터널. 서울에서 가장 많이 찍히는 가을 포토존. 12시에 만나 바로 걷기 좋고, 아름지기 2층과 카페보안 통창에서 위에서도 볼 수 있습니다.',t:['단풍','포토스팟','무료']},
  {c:'see',n:'경복궁',a:'종로구 사직로 161',lat:37.5796,lng:126.9770,h:'토 09:00–18:00 · 화 휴궁 · 11/15까지 무료',w:'good',d:'향원정과 경회루 주변 단풍. 안쪽이 깊어 한 시간은 잡아야 합니다. 코리아 그랜드 페스티벌로 무료 입장.',t:['궁궐','단풍','무료']},
- {c:'see',n:'대림미술관',a:'종로구 자하문로4길 21',lat:37.5775023,lng:126.9733626,h:'토 11:00–18:00 · 월 휴관',w:'mid',d:'대림문화재단 30주년 소장품전. 피카소·김창열·백남준 등 70여 점, 2027년 5월까지 무료. 네이버 사전예약을 권합니다.',t:['미술관','무료','예약']},
- {c:'see',n:'그라운드시소 서촌',a:'종로구 자하문로6길 18-8',lat:37.5777494,lng:126.9729204,h:'매일 10:00–19:00 · 입장 마감 18:00',w:'mid',d:'사진 찍기 좋은 체험형 전시 전문. 4개 층과 테라스, 포토부스와 굿즈샵. 현재 전시와 예매는 네이버에서 확인.',t:['전시','유료','포토부스']},
- {c:'see',n:'서촌라운지 — 살롱 드 서촌',a:'종로구 필운대로 27',lat:37.5784986,lng:126.9689335,h:'토 11:00–19:00 · 전시 11/15까지',w:'good',d:'서울 공공한옥에서 열리는 한불 수교 140주년 전시. 로에베 공예상 수상 도예가 박종진의 도자와 프랑스 아트북·포스터. 무료.',t:['한옥','전시','무료','막바지']},
- {c:'see',n:'박노수미술관',a:'종로구 옥인1길 34',lat:37.5813071,lng:126.9667955,h:'토 10:00–18:00 · 월 휴관 · 3,000원',w:'good',d:'1930년대 가옥과 정원에서 보는 한국화. 30분이면 충분하고, 단풍 든 정원과 집 자체가 사진이 됩니다.',t:['가옥','정원','한국화']},
- {c:'see',n:'갤러리시몬',a:'종로구 자하문로6길 20',lat:37.5780759,lng:126.9732512,h:'토 11:00–18:00 · 일 휴관',w:'good',d:'무료 갤러리. 4층 카페에서 뷰가 좋습니다. 대림미술관·그라운드시소와 한 블록.',t:['갤러리','무료']},
- {c:'see',n:'통의동 보안여관',a:'종로구 효자로 33',lat:37.5790439,lng:126.9736188,h:'토 12:00–18:00 · 월 휴관',w:'good',d:'1936년 여관의 뼈대를 그대로 둔 전시 공간. 15분이면 둘러보고, 신관의 카페보안·서점과 이어집니다.',t:['전시','무료','근대건축']},
- {c:'see',n:'Ofr Seoul',a:'종로구 자하문로10길 9-4',lat:37.579681,lng:126.9721096,h:'토 12:00–19:00',w:'mid',d:'파리 마레의 아트북 서점 서울점. 아트북·독립출판·에코백. 자하문로10길 패션 거리 입구라 산책이 이어집니다.',t:['아트북','굿즈','패션거리']},
- {c:'see',n:'올라이트 서촌점',a:'종로구 자하문로5가길 41',lat:37.5789096,lng:126.9697459,h:'토 13:00–18:00 · 화~목 휴무',w:'good',d:'다이어리·엽서·마스킹테이프. 저채도의 차분한 기록 문구. 토요일은 13시부터 18시까지만 엽니다.',t:['문구','다이어리']},
- {c:'see',n:'파피어프로스트',a:'종로구 누하동 1-10 1층',lat:37.5803499,lng:126.9691643,h:'토 13:00–19:00 · 월·화 휴무',w:'good',d:'아날로그키퍼의 쇼룸. 여러 종이와 펜을 직접 써 보고 고르는 곳. 매장 안에 필기 테이블이 있습니다.',t:['문구','시필','노트']},
+ {c:'see',n:'대림미술관',pid:'ChIJid45GuqifDUR8KZ5et7ShA8',a:'종로구 자하문로4길 21',lat:37.5775023,lng:126.9733626,h:'토 11:00–18:00 · 월 휴관',w:'mid',d:'대림문화재단 30주년 소장품전. 피카소·김창열·백남준 등 70여 점, 2027년 5월까지 무료. 네이버 사전예약을 권합니다.',t:['미술관','무료','예약']},
+ {c:'see',n:'그라운드시소 서촌',pid:'ChIJKX8W-HWjfDURFl_toYR-fD4',a:'종로구 자하문로6길 18-8',lat:37.5777494,lng:126.9729204,h:'매일 10:00–19:00 · 입장 마감 18:00',w:'mid',d:'사진 찍기 좋은 체험형 전시 전문. 4개 층과 테라스, 포토부스와 굿즈샵. 현재 전시와 예매는 네이버에서 확인.',t:['전시','유료','포토부스']},
+ {c:'see',n:'서촌라운지 — 살롱 드 서촌',pid:'ChIJ1dHuHQCjfDUR4vNp9QoSqnI',a:'종로구 필운대로 27',lat:37.5784986,lng:126.9689335,h:'토 11:00–19:00 · 전시 11/15까지',w:'good',d:'서울 공공한옥에서 열리는 한불 수교 140주년 전시. 로에베 공예상 수상 도예가 박종진의 도자와 프랑스 아트북·포스터. 무료.',t:['한옥','전시','무료','막바지']},
+ {c:'see',n:'박노수미술관',pid:'ChIJRYTGEb2ifDURO2ha7vYAg1M',a:'종로구 옥인1길 34',lat:37.5813071,lng:126.9667955,h:'토 10:00–18:00 · 월 휴관 · 3,000원',w:'good',d:'1930년대 가옥과 정원에서 보는 한국화. 30분이면 충분하고, 단풍 든 정원과 집 자체가 사진이 됩니다.',t:['가옥','정원','한국화']},
+ {c:'see',n:'갤러리시몬',pid:'ChIJpwrhzb-ifDURP_jiuWuoN3g',a:'종로구 자하문로6길 20',lat:37.5780759,lng:126.9732512,h:'토 11:00–18:00 · 일 휴관',w:'good',d:'무료 갤러리. 4층 카페에서 뷰가 좋습니다. 대림미술관·그라운드시소와 한 블록.',t:['갤러리','무료']},
+ {c:'see',n:'통의동 보안여관',pid:'ChIJJRxnpb-ifDURzXCEnvU-6Yk',a:'종로구 효자로 33',lat:37.5790439,lng:126.9736188,h:'토 12:00–18:00 · 월 휴관',w:'good',d:'1936년 여관의 뼈대를 그대로 둔 전시 공간. 15분이면 둘러보고, 신관의 카페보안·서점과 이어집니다.',t:['전시','무료','근대건축']},
+ {c:'see',n:'Ofr Seoul',pid:'ChIJZx_6TE-jfDURBS17Ul_8b-0',a:'종로구 자하문로10길 9-4',lat:37.579681,lng:126.9721096,h:'토 12:00–19:00',w:'mid',d:'파리 마레의 아트북 서점 서울점. 아트북·독립출판·에코백. 자하문로10길 패션 거리 입구라 산책이 이어집니다.',t:['아트북','굿즈','패션거리']},
+ {c:'see',n:'올라이트 서촌점',pid:'ChIJ3cdXccCYfDURki0ZRahHMrM',a:'종로구 자하문로5가길 41',lat:37.5789096,lng:126.9697459,h:'토 13:00–18:00 · 화~목 휴무',w:'good',d:'다이어리·엽서·마스킹테이프. 저채도의 차분한 기록 문구. 토요일은 13시부터 18시까지만 엽니다.',t:['문구','다이어리']},
+ {c:'see',n:'파피어프로스트',pid:'ChIJ-Xf-w72ifDURudZ0q--DzCU',a:'종로구 누하동 1-10 1층',lat:37.5803499,lng:126.9691643,h:'토 13:00–19:00 · 월·화 휴무',w:'good',d:'아날로그키퍼의 쇼룸. 여러 종이와 펜을 직접 써 보고 고르는 곳. 매장 안에 필기 테이블이 있습니다.',t:['문구','시필','노트']},
  {c:'see',n:'스물트론스텔레',a:'종로구 필운대로7길 8 1층',lat:37.5800,lng:126.9683,h:'금~일 09:00–20:00 · 월 휴무',w:'good',d:'마음에 드는 종이를 고르면 현장에서 바인딩해 노트를 만들어 주는 종이바. 아침 9시부터 열어 시간 제약이 없습니다.',t:['문구','종이바','신상']},
- {c:'see',n:'리틀템포 디자인샵',a:'종로구 자하문로7길 21 2층',lat:37.5787219,lng:126.9706123,h:'토 13:00–19:00 · 월·화 휴무',w:'good',d:'아자씨 캐릭터 스티커·스탬프·파우치. 2층의 작은 매장, 내부 촬영은 불가.',t:['문구','캐릭터']},
- {c:'see',n:'메이크폴리오 서촌',a:'종로구 자하문로9길 17',lat:37.5792958,lng:126.970121,h:'매일 11:00–19:00',w:'good',d:'전통주와 그릇, 향. 선물로 들고 가기 좋은 리빙 소품점.',t:['소품','전통주','선물']},
+ {c:'see',n:'리틀템포 디자인샵',pid:'ChIJZUPwv72ifDURDA4-MyF2OyI',a:'종로구 자하문로7길 21 2층',lat:37.5787219,lng:126.9706123,h:'토 13:00–19:00 · 월·화 휴무',w:'good',d:'아자씨 캐릭터 스티커·스탬프·파우치. 2층의 작은 매장, 내부 촬영은 불가.',t:['문구','캐릭터']},
+ {c:'see',n:'메이크폴리오 서촌',pid:'ChIJ2_7Tef2jfDURYzaVL2waICM',a:'종로구 자하문로9길 17',lat:37.5792958,lng:126.970121,h:'매일 11:00–19:00',w:'good',d:'전통주와 그릇, 향. 선물로 들고 가기 좋은 리빙 소품점.',t:['소품','전통주','선물']},
  {c:'see',n:'대오서점',a:'종로구 자하문로7길 55',lat:37.5792,lng:126.9700,h:'12:00–21:00',w:'good',d:'1951년에 문을 연 서촌에서 가장 오래된 서점. 한옥 외관 앞에서 사진 한 장.',t:['포토스팟','레트로']},
- {c:'see',n:'수성동계곡',a:'종로구 옥인동 185-3',lat:37.582584,lng:126.9624516,h:'상시',w:'good',d:'인왕산 바위와 계곡이 도심 한가운데. 경복궁역에서 오르막 도보 20분이라 5시 해산 일정엔 빠듯합니다.',t:['인왕산','포토스팟','오르막']}
+ {c:'see',n:'수성동계곡',pid:'ChIJtT8C9S-jfDURfQ_xFyliYc4',a:'종로구 옥인동 185-3',lat:37.582584,lng:126.9624516,h:'상시',w:'good',d:'인왕산 바위와 계곡이 도심 한가운데. 경복궁역에서 오르막 도보 20분이라 5시 해산 일정엔 빠듯합니다.',t:['인왕산','포토스팟','오르막']}
 ];
 
 /* ---------- helpers ---------- */
 const $ = s=>document.querySelector(s);
-const esc = s=>s.replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
-const gmaps = p=>`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}&travelmode=walking`;
-const kakao = p=>`https://map.kakao.com/link/to/${encodeURIComponent(p.n)},${p.lat},${p.lng}`;
-const naver = p=>`https://map.naver.com/p/search/${encodeURIComponent('서촌 '+p.n)}`;
+const esc = s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const gdir = p=>`https://www.google.com/maps/dir/?api=1&destination=${p.lat},${p.lng}${p.pid?`&destination_place_id=${p.pid}`:''}&travelmode=walking`;
+const gplace = p=>p.pid?`https://www.google.com/maps/search/?api=1&query=${p.lat},${p.lng}&query_place_id=${p.pid}`:`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent('서촌 '+p.n)}`;
 const hav=(a,b,c,d)=>{const r=Math.PI/180,R=6371000,x=(c-a)*r,y=(d-b)*r,s=Math.sin(x/2)**2+Math.cos(a*r)*Math.cos(c*r)*Math.sin(y/2)**2;return 2*R*Math.asin(Math.sqrt(s))};
+const fmt=m=>m<1000?`${Math.round(m)}m · 도보 ${Math.max(1,Math.round(m/75))}분`:`${(m/1000).toFixed(1)}km · 도보 ${Math.round(m/75)}분`;
 
-/* illustration: monochrome line + one pastel shape */
 function illo(p,i){
   const pale=CAT[p.c].pale, ink='#2F2B26';
   const shapes=[`<circle cx="${92+(i%3)*110}" cy="${70+(i%2)*30}" r="46" fill="${pale}"/>`,
@@ -325,25 +311,14 @@ function illo(p,i){
                 `<path d="M${40+(i%3)*80},150 C${60+(i%3)*80},40 ${180+(i%3)*40},40 ${200+(i%3)*40},150 Z" fill="${pale}"/>`][i%3];
   let motif='';
   if(p.c==='meal'){
-    motif=`<g fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M120 128h80c0 22-18 36-40 36s-40-14-40-36z"/><path d="M114 128h92"/><path d="M160 164v10M146 174h28"/>
-      <path d="M142 112c0-8 8-8 8-16M160 112c0-8 8-8 8-16M178 112c0-8 8-8 8-16"/>
-      <path d="M212 120l14-46M232 116l2-40"/></g>`;
+    motif=`<g fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M120 128h80c0 22-18 36-40 36s-40-14-40-36z"/><path d="M114 128h92"/><path d="M160 164v10M146 174h28"/><path d="M142 112c0-8 8-8 8-16M160 112c0-8 8-8 8-16M178 112c0-8 8-8 8-16"/><path d="M212 120l14-46M232 116l2-40"/></g>`;
   }else if(p.c==='cafe'){
-    motif=`<g fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M118 108h78v26c0 20-16 34-39 34s-39-14-39-34z"/><path d="M196 116h10a12 12 0 0 1 0 24h-10"/>
-      <path d="M110 180h96"/><path d="M142 92c0-8 8-8 8-16M160 92c0-8 8-8 8-16"/>
-      <path d="M232 70c-16 4-26 22-20 36 16-2 26-20 20-36z"/><path d="M212 106l20-36"/></g>`;
+    motif=`<g fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M118 108h78v26c0 20-16 34-39 34s-39-14-39-34z"/><path d="M196 116h10a12 12 0 0 1 0 24h-10"/><path d="M110 180h96"/><path d="M142 92c0-8 8-8 8-16M160 92c0-8 8-8 8-16"/><path d="M232 70c-16 4-26 22-20 36 16-2 26-20 20-36z"/><path d="M212 106l20-36"/></g>`;
   }else{
-    motif=`<g fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round">
-      <rect x="112" y="64" width="96" height="76" rx="2"/><rect x="124" y="76" width="72" height="52"/>
-      <path d="M124 128l20-22 14 14 12-10 26 18"/><path d="M160 140v26M140 166h40"/>
-      <path d="M236 60c-10 18-6 36 4 48 10-12 14-30 4-48" /><path d="M240 108v22"/></g>`;
+    motif=`<g fill="none" stroke="${ink}" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="112" y="64" width="96" height="76" rx="2"/><rect x="124" y="76" width="72" height="52"/><path d="M124 128l20-22 14 14 12-10 26 18"/><path d="M160 140v26M140 166h40"/><path d="M236 60c-10 18-6 36 4 48 10-12 14-30 4-48" /><path d="M240 108v22"/></g>`;
   }
-  return `<svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="#F6F4EE"/>${shapes}${motif}
-    <text x="18" y="186" font-family="JetBrains Mono,monospace" font-size="9" fill="#A09A91" letter-spacing="1">${esc(CAT[p.c].label.toUpperCase())} · ${String(i+1).padStart(2,'0')}</text></svg>`;
+  return `<svg viewBox="0 0 320 200" aria-hidden="true"><rect width="320" height="200" fill="#F6F4EE"/>${shapes}${motif}<text x="18" y="186" font-family="JetBrains Mono,monospace" font-size="9" fill="#A09A91" letter-spacing="1">${esc(CAT[p.c].label.toUpperCase())} · ${String(i+1).padStart(2,'0')}</text></svg>`;
 }
-
 const ICON={
   pin:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s7-7.5 7-13a7 7 0 0 0-14 0c0 5.5 7 13 7 13z"/><circle cx="12" cy="9" r="2.5"/></svg>',
   route:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="19" r="2"/><circle cx="18" cy="5" r="2"/><path d="M8 19h6a4 4 0 0 0 0-8H10a4 4 0 0 1 0-8h6"/></svg>',
@@ -351,13 +326,17 @@ const ICON={
   map:'<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 20l-5.5-2.5V4L9 6.5 15 4l5.5 2.5V20L15 17.5 9 20z"/><path d="M9 6.5V20M15 4v13.5"/></svg>'
 };
 
-/* ---------- list ---------- */
-let me=null, cat='all';
+/* ---------- state ---------- */
+let me=null, cat='all', map=null, markers=[], meMarker=null, infoWin=null, dirSvc=null, dirRend=null, placesSvc=null, mapsReady=false;
+const photoCache={};
+P.forEach((p,i)=>p.i=i);
+
+/* ---------- cards ---------- */
 function card(p,i){
   const w=p.w==='good'?'good':p.w==='bad'?'bad':'';
   return `<article class="card rv" id="p${p.i}" data-cat="${p.c}" style="--i:${i%6}">
-    <div class="fig">${illo(p,p.i)}<div class="grain"></div>
-      <a class="photo-link" href="${naver(p)}" target="_blank" rel="noopener">${ICON.photo}사진 보기</a></div>
+    <div class="fig" id="f${p.i}">${illo(p,p.i)}<div class="grain"></div><span class="attr" id="a${p.i}"></span>
+      <a class="photo-link" href="${gplace(p)}" target="_blank" rel="noopener">${ICON.photo}사진 보기</a></div>
     <div class="body">
       <div class="meta"><span class="pill ${p.c}">${CAT[p.c].label}</span><span class="wait ${w}">${WAIT[p.w]}</span><span class="dist" id="d${p.i}"></span></div>
       <h3>${esc(p.n)}</h3>
@@ -366,15 +345,13 @@ function card(p,i){
       <div class="hours">${esc(p.h)}</div>
       <div class="tagrow">${p.t.map(t=>`<span class="tag">${esc(t)}</span>`).join('')}</div>
       <div class="actions">
-        <a class="btn primary" href="${gmaps(p)}" target="_blank" rel="noopener">${ICON.route}현재 위치에서 길찾기</a>
-        <a class="btn" href="${kakao(p)}" target="_blank" rel="noopener">카카오맵</a>
+        <button class="btn primary" data-route="${p.i}">${ICON.route}현재 위치에서 길찾기</button>
+        <a class="btn" href="${gdir(p)}" target="_blank" rel="noopener">Google 지도 앱</a>
         <button class="btn" data-focus="${p.i}">${ICON.map}지도에서 보기</button>
       </div>
     </div></article>`;
 }
-P.forEach((p,i)=>p.i=i);
 function render(){
-  const list=$('#list');
   const cats=cat==='all'?['meal','cafe','see']:[cat];
   let html='';
   cats.forEach(c=>{
@@ -385,110 +362,167 @@ function render(){
       <p class="lede" style="margin:-6px 0 18px;font-size:13.5px">${CAT[c].desc}</p>
       <div class="grid">${items.map((p,i)=>card(p,i)).join('')}</div></section>`;
   });
-  list.innerHTML=html;
+  $('#list').innerHTML=html;
   $('#count').textContent=`${cats.reduce((n,c)=>n+P.filter(p=>p.c===c).length,0)} PLACES`;
   if(me) P.forEach(p=>{const el=$('#d'+p.i); if(el){el.textContent=fmt(p.dist);el.classList.add('show')}});
-  observe();
-  syncMarkers();
+  observe(); syncMarkers(); applyPhotos();
 }
-const fmt=m=>m<1000?`${Math.round(m)}m · 도보 ${Math.max(1,Math.round(m/75))}분`:`${(m/1000).toFixed(1)}km · 도보 ${Math.round(m/75)}분`;
 
-/* ---------- map (hand-drawn, offline) ---------- */
-const BB={w:126.9600,e:126.9810,n:37.5885,s:37.5735};
-const VW=820,VH=640;
-const X=lng=>(lng-BB.w)/(BB.e-BB.w)*VW, Y=lat=>(BB.n-lat)/(BB.n-BB.s)*VH;
-function mapSVG(){
-  const roads=`
-   <path class="area mtn" d="M0 60 C60 20 120 80 150 140 C190 210 120 300 70 360 C40 400 10 430 0 470 Z"/>
-   <text class="arealabel" x="28" y="150">인왕산</text>
-   <ellipse class="area mtn" cx="${X(126.9630)}" cy="${Y(37.5825)}" rx="34" ry="22"/>
-   <rect class="area" x="${X(126.9752)}" y="${Y(37.5838)}" width="${X(126.9806)-X(126.9752)}" height="${Y(37.5758)-Y(37.5838)}" rx="3"/>
-   <text class="arealabel" x="${X(126.9760)}" y="${Y(37.5800)}">경복궁</text>
-   <path class="road main" d="M${X(126.9708)} ${Y(37.5735)} L${X(126.9708)} ${Y(37.5885)}"/>
-   <text class="roadlabel" x="${X(126.9712)}" y="${Y(37.5745)}">자하문로</text>
-   <path class="road main" d="M${X(126.9737)} ${Y(37.5758)} L${X(126.9737)} ${Y(37.5845)}"/>
-   <text class="roadlabel" x="${X(126.9741)}" y="${Y(37.5770)}">효자로</text>
-   <path class="road main" d="M0 ${Y(37.5757)} L${VW} ${Y(37.5757)}"/>
-   <text class="roadlabel" x="${X(126.9660)}" y="${Y(37.5750)}">사직로</text>
-   <path class="road" d="M${X(126.9685)} ${Y(37.5757)} L${X(126.9684)} ${Y(37.5815)} L${X(126.9670)} ${Y(37.5845)}"/>
-   <text class="roadlabel" x="${X(126.9650)}" y="${Y(37.5790)}">필운대로</text>
-   <path class="road" d="M${X(126.9708)} ${Y(37.5806)} L${X(126.9684)} ${Y(37.5806)}"/>
-   <text class="roadlabel" x="${X(126.9688)}" y="${Y(37.5811)}">통인시장</text>
-   <path class="road" d="M${X(126.9708)} ${Y(37.5778)} L${X(126.9737)} ${Y(37.5778)}"/>
-   <path class="road" d="M${X(126.9708)} ${Y(37.5797)} L${X(126.9737)} ${Y(37.5797)}"/>
-   <path class="road" d="M${X(126.9708)} ${Y(37.5765)} L${X(126.9685)} ${Y(37.5765)}"/>
-   <path class="road" d="M${X(126.9708)} ${Y(37.5790)} L${X(126.9684)} ${Y(37.5792)}"/>
-   <path class="road" d="M${X(126.9684)} ${Y(37.5815)} L${X(126.9640)} ${Y(37.5826)}"/>
-   <path class="road" d="M${X(126.9737)} ${Y(37.5758)} L${X(126.9737)} ${Y(37.5735)}"/>
-   <g class="roadlabel"><text x="${X(126.9700)}" y="${Y(37.5738)}" text-anchor="end">경복궁역 ↓</text></g>
-   <g class="roadlabel" opacity=".8"><text x="${X(126.9744)}" y="${Y(37.5830)}" fill="#B8862B">은행나무길</text></g>`;
-  const marks=P.map(p=>`<g class="mk" data-m="${p.i}" transform="translate(${X(p.lng).toFixed(1)} ${Y(p.lat).toFixed(1)})">
-      <circle class="ring" r="11" stroke="${CAT[p.c].hex}"/><circle r="5.5" fill="${CAT[p.c].hex}" stroke="#FBFAF6" stroke-width="2"/>
-      <text x="9" y="4">${esc(p.n)}</text></g>`).join('');
-  return `<div class="maphead"><b>서촌 지도</b><span>SCHEMATIC · TAP A PIN</span></div>
-   <svg viewBox="0 0 ${VW} ${VH}" role="img" aria-label="서촌 장소 지도">${roads}${marks}
-     <g class="me"><circle class="pulse" r="12" fill="#B5452B" opacity=".3"/><circle r="6" fill="#B5452B" stroke="#fff" stroke-width="2"/><text x="10" y="-8" font-family="JetBrains Mono" font-size="9" fill="#B5452B">내 위치</text></g>
-   </svg>
-   <div class="legend"><span><i style="background:${CAT.meal.hex}"></i>식사</span><span><i style="background:${CAT.cafe.hex}"></i>카페</span><span><i style="background:${CAT.see.hex}"></i>구경</span><span><i style="background:#B5452B;outline:2px solid #F8E6DF"></i>내 위치</span></div>
-   <div class="mapnote">약도입니다. 핀을 누르면 해당 장소로 이동하고, 카드의 「현재 위치에서 길찾기」가 실제 경로를 엽니다.</div>`;
+/* ---------- Google Maps ---------- */
+const MAP_STYLE=[
+  {elementType:'geometry',stylers:[{color:'#f3f1eb'}]},
+  {elementType:'labels.text.fill',stylers:[{color:'#6f6a63'}]},
+  {elementType:'labels.text.stroke',stylers:[{color:'#fbfaf6'}]},
+  {featureType:'poi',stylers:[{visibility:'off'}]},
+  {featureType:'poi.park',elementType:'geometry',stylers:[{color:'#e4e8d8'},{visibility:'on'}]},
+  {featureType:'landscape.natural',elementType:'geometry',stylers:[{color:'#e9ecdf'}]},
+  {featureType:'road',elementType:'geometry',stylers:[{color:'#ffffff'}]},
+  {featureType:'road',elementType:'geometry.stroke',stylers:[{color:'#e3dfd6'}]},
+  {featureType:'road.arterial',elementType:'geometry',stylers:[{color:'#fdfcf8'}]},
+  {featureType:'road',elementType:'labels.text.fill',stylers:[{color:'#8a847b'}]},
+  {featureType:'transit',stylers:[{visibility:'off'}]},
+  {featureType:'transit.station.rail',stylers:[{visibility:'on'}]},
+  {featureType:'water',elementType:'geometry',stylers:[{color:'#dfe6ea'}]}
+];
+function pinIcon(hex,on){
+  const s=on?34:26;
+  const svg=`<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 30" width="${s}" height="${s*1.25}"><path d="M12 29s9-9.5 9-16.5A9 9 0 0 0 3 12.5C3 19.5 12 29 12 29z" fill="${hex}" stroke="#fff" stroke-width="1.6"/><circle cx="12" cy="12.5" r="3.4" fill="#fff"/></svg>`;
+  return {url:'data:image/svg+xml;charset=UTF-8,'+encodeURIComponent(svg),scaledSize:new google.maps.Size(s,s*1.25),anchor:new google.maps.Point(s/2,s*1.25)};
 }
-function mountMaps(){
-  ['#mapbox-desktop','#mapbox-mobile'].forEach(s=>{const el=$(s); el.innerHTML=mapSVG();
-    el.querySelectorAll('.mk').forEach(m=>m.addEventListener('click',()=>{focus(+m.dataset.m,true)}));});
+function loadMaps(){
+  if(!GMAPS_KEY){
+    $('#gmap').innerHTML=`<div class="nokey"><b>Google Maps API 키가 필요합니다</b>index.html 상단 <code>GMAPS_KEY</code>에 키를 넣으면 지도·사진·경로가 활성화됩니다. 키가 없어도 각 카드의 「Google 지도 앱」·「사진 보기」 링크는 작동합니다.</div>`;
+    $('#maphint').textContent='KEY MISSING'; return;
+  }
+  window.__initMap=initMap;
+  const s=document.createElement('script');
+  s.src=`https://maps.googleapis.com/maps/api/js?key=${encodeURIComponent(GMAPS_KEY)}&libraries=places&language=ko&region=KR&loading=async&callback=__initMap`;
+  s.async=true; s.onerror=()=>{$('#gmap').innerHTML='<div class="nokey"><b>지도를 불러오지 못했습니다</b>API 키와 리퍼러 제한, Maps JavaScript API 사용 설정을 확인해 주세요.</div>'};
+  document.head.appendChild(s);
+}
+function initMap(){
+  map=new google.maps.Map($('#gmap'),{center:{lat:37.5795,lng:126.9712},zoom:16,styles:MAP_STYLE,mapTypeControl:false,streetViewControl:false,fullscreenControl:true,gestureHandling:'greedy',clickableIcons:false});
+  infoWin=new google.maps.InfoWindow();
+  dirSvc=new google.maps.DirectionsService();
+  dirRend=new google.maps.DirectionsRenderer({map,suppressMarkers:true,preserveViewport:false,polylineOptions:{strokeColor:'#B5452B',strokeWeight:5,strokeOpacity:.85}});
+  placesSvc=new google.maps.places.PlacesService(map);
+  markers=P.map(p=>{
+    const m=new google.maps.Marker({map,position:{lat:p.lat,lng:p.lng},title:p.n,icon:pinIcon(CAT[p.c].hex,false),optimized:false});
+    m.addListener('click',()=>openInfo(p));
+    return m;
+  });
+  mapsReady=true; $('#maphint').textContent='GOOGLE MAPS';
+  syncMarkers(); applyPhotos();
+  if(me) placeMe();
+}
+function openInfo(p){
+  focus(p.i,true);
+  const el=document.createElement('div'); el.className='iw';
+  el.innerHTML=`<b>${esc(p.n)}</b><small>${esc(p.a)}${me?' · '+fmt(p.dist):''}</small><button class="primary" data-r="${p.i}">길찾기</button><a href="${gplace(p)}" target="_blank" rel="noopener">Google 지도</a>`;
+  el.querySelector('button').addEventListener('click',()=>routeTo(p));
+  infoWin.setContent(el); infoWin.open({map,anchor:markers[p.i]});
 }
 function syncMarkers(){
-  document.querySelectorAll('.mk').forEach(m=>{const p=P[+m.dataset.m]; m.classList.toggle('dim',cat!=='all'&&p.c!==cat)});
+  if(!mapsReady) return;
+  markers.forEach((m,i)=>{const p=P[i]; m.setVisible(cat==='all'||p.c===cat)});
 }
-function focus(i,scroll){
-  document.querySelectorAll('.mk').forEach(m=>m.classList.toggle('on',+m.dataset.m===i));
+function focus(i,fromMap){
   document.querySelectorAll('.card').forEach(c=>c.classList.remove('focus'));
   const p=P[i];
   if(cat!=='all'&&p.c!==cat){cat='all';setTab();render()}
-  const el=$('#p'+i); if(!el) return;
-  el.classList.add('focus');
-  if(scroll){closeSheet(); el.scrollIntoView({behavior:'smooth',block:'center'})}
+  const el=$('#p'+i); if(el){el.classList.add('focus'); if(fromMap) el.scrollIntoView({behavior:'smooth',block:'center'})}
+  if(mapsReady){
+    markers.forEach((m,j)=>m.setIcon(pinIcon(CAT[P[j].c].hex,j===i)));
+    if(!fromMap){map.panTo({lat:p.lat,lng:p.lng}); if(map.getZoom()<16) map.setZoom(16); openInfoQuiet(p)}
+  }
 }
-function placeMe(){
-  document.querySelectorAll('.me').forEach(g=>{
-    const inside=me.lat<BB.n&&me.lat>BB.s&&me.lng>BB.w&&me.lng<BB.e;
-    g.classList.toggle('show',inside);
-    if(inside) g.setAttribute('transform',`translate(${X(me.lng).toFixed(1)} ${Y(me.lat).toFixed(1)})`);
-  });
+function openInfoQuiet(p){
+  const el=document.createElement('div'); el.className='iw';
+  el.innerHTML=`<b>${esc(p.n)}</b><small>${esc(p.a)}${me?' · '+fmt(p.dist):''}</small><button class="primary">길찾기</button><a href="${gplace(p)}" target="_blank" rel="noopener">Google 지도</a>`;
+  el.querySelector('button').addEventListener('click',()=>routeTo(p));
+  infoWin.setContent(el); infoWin.open({map,anchor:markers[p.i]});
 }
 
-/* ---------- geolocation ---------- */
-$('#locate').addEventListener('click',()=>{
+/* ---------- photos (Places) ---------- */
+function applyPhotos(){
+  if(!mapsReady||!PHOTOS_FROM_PLACES) return;
+  P.forEach(p=>{
+    const fig=$('#f'+p.i); if(!fig||fig.classList.contains('has-photo')) return;
+    if(photoCache[p.i]){setPhoto(p,photoCache[p.i]);return}
+    if(photoCache[p.i]===null) return;
+    photoCache[p.i]=null;
+    const done=(res,st)=>{
+      if(st!==google.maps.places.PlacesServiceStatus.OK||!res||!res.photos||!res.photos.length) return;
+      const ph=res.photos[0];
+      photoCache[p.i]={url:ph.getUrl({maxWidth:800,maxHeight:600}),attr:(ph.html_attributions||[])[0]||''};
+      setPhoto(p,photoCache[p.i]);
+    };
+    if(p.pid) placesSvc.getDetails({placeId:p.pid,fields:['photos']},done);
+    else placesSvc.findPlaceFromQuery({query:'서촌 '+p.n,fields:['photos']},(r,st)=>done(r&&r[0],st));
+  });
+}
+function setPhoto(p,ph){
+  const fig=$('#f'+p.i); if(!fig||fig.classList.contains('has-photo')) return;
+  const img=new Image(); img.alt=p.n+' 사진';
+  img.onload=()=>{fig.insertBefore(img,fig.querySelector('.grain')); fig.classList.add('has-photo'); $('#a'+p.i).innerHTML=ph.attr; requestAnimationFrame(()=>img.classList.add('in'))};
+  img.src=ph.url;
+}
+
+/* ---------- location & routing ---------- */
+function placeMe(){
+  if(!mapsReady||!me) return;
+  if(!meMarker){
+    meMarker=new google.maps.Marker({map,position:me,zIndex:999,title:'내 위치',icon:{path:google.maps.SymbolPath.CIRCLE,scale:8,fillColor:'#2B6CB0',fillOpacity:1,strokeColor:'#fff',strokeWeight:2.5}});
+  }else meMarker.setPosition(me);
+  const b=new google.maps.LatLngBounds(me); b.extend({lat:37.5795,lng:126.9712}); map.fitBounds(b,60);
+}
+function locate(){
+  return new Promise((res,rej)=>{
+    try{
+      if(!('geolocation' in navigator)) return rej(new Error('nogeo'));
+      navigator.geolocation.getCurrentPosition(pos=>{
+        me={lat:pos.coords.latitude,lng:pos.coords.longitude};
+        P.forEach(p=>p.dist=hav(me.lat,me.lng,p.lat,p.lng));
+        res(me);
+      },rej,{enableHighAccuracy:true,timeout:10000,maximumAge:60000});
+    }catch(e){rej(e)}
+  });
+}
+const LOC_ERR='이 화면에서는 위치를 읽을 수 없습니다. 「Google 지도 앱」 버튼은 앱에서 현재 위치를 자동으로 씁니다.';
+$('#locate').addEventListener('click',async()=>{
   const st=$('#status'); st.className='status'; st.textContent='위치를 확인하는 중…';
-  try{
-    if(!('geolocation' in navigator)) throw new Error('nogeo');
-    navigator.geolocation.getCurrentPosition(pos=>{
-      me={lat:pos.coords.latitude,lng:pos.coords.longitude};
-      P.forEach(p=>p.dist=hav(me.lat,me.lng,p.lat,p.lng));
-      st.className='status ok'; st.textContent='현재 위치 기준 도보 거리로 정렬했습니다.';
-      placeMe(); render();
-    },err=>{
-      st.className='status err';
-      st.textContent='이 화면에서는 위치를 읽을 수 없습니다. 카드의 길찾기 버튼은 지도 앱에서 현재 위치를 자동으로 씁니다.';
-    },{enableHighAccuracy:true,timeout:8000,maximumAge:60000});
-  }catch(e){
-    st.className='status err';
-    st.textContent='이 화면에서는 위치를 읽을 수 없습니다. 카드의 길찾기 버튼은 지도 앱에서 현재 위치를 자동으로 씁니다.';
-  }
+  try{ await locate(); st.className='status ok'; st.textContent='현재 위치 기준 도보 거리로 정렬했습니다.'; placeMe(); render(); }
+  catch(e){ st.className='status err'; st.textContent=LOC_ERR; }
 });
+async function routeTo(p){
+  if(!mapsReady){ window.open(gdir(p),'_blank','noopener'); return; }
+  const bar=$('#routebar');
+  if(!me){
+    try{ await locate(); placeMe(); render(); }
+    catch(e){ $('#status').className='status err'; $('#status').textContent=LOC_ERR; window.open(gdir(p),'_blank','noopener'); return; }
+  }
+  $('#routeName').textContent=p.n; $('#routeInfo').textContent='경로 계산 중…'; $('#routeOpen').href=gdir(p); bar.classList.add('show');
+  $('#mapbox').classList.remove('collapsed');
+  dirSvc.route({origin:me,destination:p.pid?{placeId:p.pid}:{lat:p.lat,lng:p.lng},travelMode:google.maps.TravelMode.WALKING},(r,st)=>{
+    if(st!=='OK'){ $('#routeInfo').textContent='경로를 만들 수 없어 앱으로 엽니다.'; window.open(gdir(p),'_blank','noopener'); return; }
+    dirRend.setDirections(r);
+    const leg=r.routes[0].legs[0];
+    $('#routeInfo').textContent=`${leg.distance.text} · ${leg.duration.text}`;
+    focus(p.i,true);
+  });
+}
+$('#routeClear').addEventListener('click',()=>{dirRend&&dirRend.set('directions',null);$('#routebar').classList.remove('show')});
+document.addEventListener('click',e=>{
+  const r=e.target.closest('[data-route]'); if(r){routeTo(P[+r.dataset.route]); return}
+  const f=e.target.closest('[data-focus]'); if(f){focus(+f.dataset.focus,false); $('#mapbox').classList.remove('collapsed'); window.scrollTo({top:0,behavior:'smooth'})}
+});
+$('#toggleMap').addEventListener('click',e=>{const c=$('#mapbox').classList.toggle('collapsed'); e.target.textContent=c?'펼치기':'접기'; if(!c&&map) google.maps.event.trigger(map,'resize')});
 
 /* ---------- tabs / hash ---------- */
 function setTab(){document.querySelectorAll('.tab').forEach(t=>t.classList.toggle('on',t.dataset.cat===cat))}
 $('#tabs').addEventListener('click',e=>{const t=e.target.closest('.tab'); if(!t) return; cat=t.dataset.cat; setTab(); render();
   if(cat==='all') history.replaceState(null,'',' '); else location.hash=cat; window.scrollTo({top:$('#list').offsetTop-80,behavior:'smooth'});});
 window.addEventListener('hashchange',()=>{const h=location.hash.slice(1); if(['meal','cafe','see'].includes(h)){cat=h;setTab();render()}});
-document.addEventListener('click',e=>{const b=e.target.closest('[data-focus]'); if(b){focus(+b.dataset.focus,false); if(window.innerWidth<=900) openSheet()}});
-
-/* ---------- sheet ---------- */
-function openSheet(){$('#sheet').classList.add('open');$('#sheet').setAttribute('aria-hidden','false')}
-function closeSheet(){$('#sheet').classList.remove('open');$('#sheet').setAttribute('aria-hidden','true')}
-$('#fab').addEventListener('click',openSheet);
-$('#closeSheet').addEventListener('click',closeSheet);
-$('#sheet').addEventListener('click',e=>{if(e.target.id==='sheet') closeSheet()});
 
 /* ---------- reveal ---------- */
 let io;
@@ -500,9 +534,8 @@ function observe(){
 }
 
 /* ---------- init ---------- */
-mountMaps();
 const h0=location.hash.slice(1); if(['meal','cafe','see'].includes(h0)) cat=h0; setTab();
-render();
+render(); loadMaps();
 </script>
 </body>
 </html>
