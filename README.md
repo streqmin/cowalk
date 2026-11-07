@@ -14,27 +14,40 @@
 
 ## 설정 (필수)
 
+API 키는 저장소에 커밋하지 않고 **GitHub Secret**에 두며, Actions가 배포할 때 `index.html`의
+`__GMAPS_KEY__` 자리표시자에 주입합니다 (`.github/workflows/deploy.yml`).
+
 1. [Google Cloud 콘솔](https://console.cloud.google.com/)에서 프로젝트를 만들고 다음 API를 사용 설정합니다.
    - Maps JavaScript API
    - Places API
    - Directions API
-2. API 키를 만들고 **애플리케이션 제한 → HTTP 리퍼러**에 배포 주소를 넣습니다.
-   예: `https://streqmin.github.io/*`, 로컬 테스트 시 `http://localhost/*`
-3. `index.html` 상단의 설정에 키를 넣습니다.
+2. API 키를 만들고 **애플리케이션 제한 → HTTP 리퍼러**에 `https://streqmin.github.io/*` 를 넣고,
+   **API 제한**에서 위 세 API만 허용합니다.
+3. 저장소 **Settings → Secrets and variables → Actions → New repository secret**
+   - Name: `GMAPS_KEY`
+   - Secret: 발급받은 키
+4. 저장소 **Settings → Pages → Build and deployment → Source: GitHub Actions** 로 바꿉니다.
+5. `main`에 푸시하거나 Actions 탭에서 `Deploy to GitHub Pages`를 수동 실행하면
+   `https://streqmin.github.io/cowalk/` 에 배포됩니다.
 
-   ```js
-   const GMAPS_KEY = '발급받은 키';
-   const PHOTOS_FROM_PLACES = true; // Places 사진 요청을 끄려면 false
-   ```
+> 정적 페이지 특성상 배포된 HTML에는 키가 포함됩니다. Secret은 "저장소 소스에 키를 남기지 않는" 용도이고,
+> 실제 오남용 방지는 2번의 리퍼러·API 제한이 담당합니다.
 
-키가 없으면 지도 영역에 안내만 표시되고, 카드의 「Google 지도 앱」·「사진 보기」 링크는 그대로 작동합니다.
+Secret이 없으면 지도 영역에 안내만 표시되고, 카드의 「Google 지도 앱」·「사진 보기」 링크는 그대로 작동합니다.
+Places 사진 요청을 끄려면 `index.html`의 `PHOTOS_FROM_PLACES = false`.
 
-> Places 사진은 장소마다 요청이 발생해 무료 한도를 넘기면 과금될 수 있습니다. 개인 용도의 트래픽이면 월 무료 크레딧 안에서 충분하지만, 불안하면 `PHOTOS_FROM_PLACES = false`로 두세요.
+### 로컬 테스트
+
+```bash
+GMAPS_KEY=발급키 python3 -c "import os,pathlib;p=pathlib.Path('index.html');pathlib.Path('local.html').write_text(p.read_text().replace('__GMAPS_KEY__',os.environ['GMAPS_KEY']))"
+python3 -m http.server 8000   # http://localhost:8000/local.html
+```
+
+`local.html`은 `.gitignore`에 포함되어 커밋되지 않습니다.
 
 ## 배포
 
-GitHub Pages: Settings → Pages → Branch `main` / `/ (root)`.
-배포 주소는 `https://streqmin.github.io/cowalk/` 입니다. `file://`로 열면 위치 권한이 동작하지 않는 브라우저가 있으니 로컬 테스트는 간단한 정적 서버(`python -m http.server`)를 권합니다.
+GitHub Actions(`deploy.yml`)가 `main` 푸시마다 자동 배포합니다. Pages Source는 **GitHub Actions**여야 합니다.
 
 ## 참고
 

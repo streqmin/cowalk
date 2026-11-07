@@ -1,0 +1,53 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Inject Google Maps API key from secret
+        env:
+          GMAPS_KEY: ${{ secrets.GMAPS_KEY }}
+        run: |
+          if [ -z "$GMAPS_KEY" ]; then
+            echo "::warning::GMAPS_KEY secret is not set — the page will deploy without a map key."
+          fi
+          mkdir -p dist
+          # 키에 sed 특수문자가 섞여도 안전하도록 python으로 치환
+          python3 - <<'PY'
+          import os, pathlib
+          key = os.environ.get("GMAPS_KEY", "")
+          src = pathlib.Path("index.html").read_text(encoding="utf-8")
+          assert "__GMAPS_KEY__" in src, "placeholder not found"
+          pathlib.Path("dist/index.html").write_text(src.replace("__GMAPS_KEY__", key), encoding="utf-8")
+          PY
+          cp README.md dist/ 2>/dev/null || true
+
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: dist
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

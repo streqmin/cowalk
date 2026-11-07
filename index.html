@@ -240,10 +240,10 @@
 
 <script>
 /* ============ CONFIG ============
-   Google Cloud 콘솔에서 발급한 API 키를 넣으세요.
-   필요한 API: Maps JavaScript API, Places API, Directions API
-   키 제한: HTTP 리퍼러 → https://streqmin.github.io/* (및 로컬 테스트 주소)      */
-const GMAPS_KEY = '';
+   GMAPS_KEY는 저장소에 두지 않습니다. GitHub Secret(GMAPS_KEY)이 Actions 배포 시
+   아래 자리표시자에 주입됩니다 (.github/workflows/deploy.yml 참고).
+   로컬 테스트: 이 줄만 임시로 바꾸고 커밋하지 마세요.                              */
+const GMAPS_KEY = (k=>k.startsWith('__')?'':k)('__GMAPS_KEY__');
 const PHOTOS_FROM_PLACES = true;   // Places 사진 불러오기 (요청당 과금 주의, 끄려면 false)
 /* ================================ */
 
